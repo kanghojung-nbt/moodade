@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'disqus',
     'django.contrib.sites',
     'photo.apps.PhotoConfig',
+    'mood.apps.MoodConfig',
 ]
 
 DISQUS_WEBSITE_SHORTNAME = 'pythonwebprogramming'

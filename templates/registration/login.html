@@ -9,9 +9,7 @@
 <div id="content">
 
     <h1>Please Login </h1>
-
     <form action="." method="post">{% csrf_token %}
-
     {% if form.errors %}
     <p class="errornote">Wrong! Please correct the error(s) below.</p>
     {% endif %}

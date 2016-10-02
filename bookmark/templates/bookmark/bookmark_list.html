@@ -5,7 +5,6 @@
 {% block content %}
 <div id="content">
     <h1>Bookmark List</h1>
-
     <ul>
         {% for bookmark in object_list %}
             <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>

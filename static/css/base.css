@@ -1,4 +1,14 @@
 
+.navbar-default {
+    background: PINK;
+}
+
+.moodade-title {
+    color: black;
+    font-size: 40px;
+    text-align: center;
+}
+
 /* LINK */
 a:link, a:visited {
     text-decoration: none;
