@@ -23,4 +23,5 @@ class Migration(migrations.Migration):
                 ('mood_Amount', models.FloatField(default=0, null=True)),
             ],
         ),
+
     ]

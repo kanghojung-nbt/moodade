@@ -2,7 +2,8 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
-
+from django.shortcuts import render
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -27,3 +28,6 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
+
+def single_photo(request):
+    return HttpResponse('3번...3번 사진을 보여 드릴게요.')
