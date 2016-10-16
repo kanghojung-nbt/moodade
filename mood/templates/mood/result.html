@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static 'css/heartshape.css' %}{% endblock %}
+{% block prescript %}
+{% endblock %}
+{% block content %}
+    <div class="moodade-title" style="text-align: center"> 당신의 무드에이드는?</div>
+    <div class="moodade-subtitle" style="text-align: center"> 현재 당신의 기분은 다음과 같습니다.</div>
+    <div class="conainter-fluid" style="margin-top: 10%">
+        <div class="row">
+            <div class="col-xs-6" data-placement="left" title="왼쪽">
+                <div class=today-mood">오늘의 무드에이드</div>
+                <div class='block'>
+                    <div class='heart'></div>
+                </div>
+
+            </div>
+            <div class="col-xs-6" data-placement="right" title="오른쪽">
+                문구 나타내고
+            </div>
+        </div>
+        <div class="row">
+            <div class="moodade-verb-container">무드에이드 레시피
+                    <div class="moodade-verb-list">
+                        {% for verb in myverb %}
+                            <div>{{ verb }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+

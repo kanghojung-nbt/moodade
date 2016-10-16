@@ -1,7 +1,15 @@
+{% extends "base.html" %}
 
-    <ul>
-    {% for mood in mood_verb_list %}
-        <li>{{ mood }}</a></li>
-    {% endfor %}
-    </ul>
+{% block title %}Django Bookmark List{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Bookmark List</h1>
+        <ul>
+            {% for bookmark in object_list %}
+                <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
 

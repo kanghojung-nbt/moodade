@@ -1,27 +1,86 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>jQCloud Example</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/jqcloud/jqcloud.css"/>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-    <script type="text/javascript" src="/static/js/jqcloud/jqcloud-1.0.4.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var moodtxt = $(location).attr('pathname');
-            var my_words = new Array();
-            {% for mood in mood_verb_list %}
-                var a= Math.random()*10;
-                a= a.toFixed(1);
-                my_words.push({text: "{{ mood.mood_Verb }}", weight: a});
-            {% endfor %}
-            $("#my_favorite_latin_words").jQCloud(my_words, {shape: "rectangular"});
-        });
-    </script>
-</head>
-<body>
-<h1>jQCloud Example</h1>
-<div id="my_favorite_latin_words" style="width: 80%; height: 350px; ">
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extrastyle %}{% static 'css/circle.css' %}{% endblock %}
+{% block  extra_head %}
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+        var ourverb = '';
+        $('[id="mood_verb"]').mousedown(function (e) {
+            var tip = $(this).attr('title');
+            var data = $(this).text();
 
-</div>
-</body>
-</html>
+            // 브라우져에서 제공하는 기본 툴 팁을 끈다
+            $(this).attr('title', '');
+            // css와 연동하기 위해 html 태그를 추가해줌
+            $(this).remove("");
+            ourverb += data + ',';
+            $('verblist').text(ourverb);
+            var tmp = $('verblist').val();
+            console.log($('#verblist').val());
+        })
+
+    </script>
+
+
+{% endblock %}
+
+{% block prescript %}
+
+
+
+
+{% endblock %}
+
+{% block extrascript %}
+    var ourverb='';
+    $('[id="mood_verb"]').mousedown(function (e) {
+    var tip = $(this).attr('title');
+    var data = $(this).text();
+
+    // 브라우져에서 제공하는 기본 툴 팁을 끈다
+    $(this).attr('title', '');
+    // css와 연동하기 위해 html 태그를 추가해줌
+    $(this).remove("");
+    ourverb+=data+',';
+    $('#verblist').val(ourverb);
+    alert($('#verblist').val());
+
+    })
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+    {% for mood in mood_verb_list %}
+        {% if forloop.first %}
+            <div class="row">
+        {% endif %}
+    <div class="col-xs-4" id="mood_verb">
+        {{ mood.mood_Verb }}
+    </div>
+    {% if forloop.counter|divisibleby:3 %}
+            </div><div class="row">
+    {% endif %}
+    {% if forloop.last %}
+        </div>
+    {% endif %}
+    {% endfor %}
+
+
+
+    <form method="post" action="/mood/result/">
+        {% csrf_token %}
+        <input type="text" name="verblist" id="verblist">
+        <input type="submit" value="OK">
+    </form>
+
+
+{% endblock %}
+
+
+
+

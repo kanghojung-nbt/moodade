@@ -8,7 +8,7 @@ class MoodAdmin(admin.ModelAdmin):
 
 class EmoticonAdmin(admin.ModelAdmin):
     list_display = ('mcolor','memotion')
-
+    
 class EmotionAdmin(admin.ModelAdmin):
     list_display = ('category','mood_Verb','mood_Amount')
 
