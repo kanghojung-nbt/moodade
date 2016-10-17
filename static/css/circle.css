@@ -1,7 +1,8 @@
 #mood_verb{
-    width: 30%;
+    width: 100px;
     height: 100px;
     background: skyblue;
     border-radius: 100%;
-    content: 'dsafd';
+    text-align: center;
+    margin: 5%;
 }

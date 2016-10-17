@@ -12,6 +12,7 @@
     {% block extra_head %}{% endblock %}
 
     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -119,7 +120,23 @@
 <div class="container">
     {% block content %}{% endblock %}
 
-    {% block footer %}{% endblock %}
+    {% block footer %}
+        <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <hr class="small">
+                    <p> <i class="fa fa-facebook-square" ><a href="https://www.facebook.com/MoodAdeOfficial/?fref=ts">moodade</a></i>
+                        <i class="fa fa-envelope-o fa-fw"></i> <a
+                                href="mailto:70hojung@gmail.com">contact@gmail.com</a>
+                        <i class="glyphicon glyphicon-earphone">010-4901-6415</i>
+                    </p>
+                    <p class="text-muted">Copyright &copy; moodade by 2016   </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript
