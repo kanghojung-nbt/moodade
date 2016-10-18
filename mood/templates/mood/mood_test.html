@@ -2,7 +2,9 @@
 {% load staticfiles %}
 {% block extrastyle %}{% static 'css/circle.css' %}{% endblock %}
 {% block  extra_head %}
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- Plugin -->
+
+
     <script>
         var ourverb = '';
         $('[id="mood_verb"]').mousedown(function (e) {
@@ -12,7 +14,7 @@
             // 브라우져에서 제공하는 기본 툴 팁을 끈다
             $(this).attr('title', '');
             // css와 연동하기 위해 html 태그를 추가해줌
-            $('[id="mood_verb"]').css("border-color","pink")
+            $('[id="mood_verb"]').css("border-color","pink");
             ourverb += data + ',';
             $('verblist').text(ourverb);
             var tmp = $('verblist').val();
@@ -24,14 +26,15 @@
 
 {% endblock %}
 
-{% block prescript %}
-
+{% block bottomscript %}
 
 
 
 {% endblock %}
 
 {% block extrascript %}
+
+
     var ourverb='';
     $('[id="mood_verb"]').mousedown(function (e) {
     var tip = $(this).attr('title');

@@ -19,6 +19,6 @@ urlpatterns = [
                   url(r'^blog/', include('blog.urls', namespace='blog')),
                   url(r'^photo/', include('photo.urls', namespace='photo')),
                   url(r'^mood/', include('mood.urls', namespace='mood')),
-
+                  url(r'^moodcalendar/', include('moodcalendar.urls', namespace='moodcalendar')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

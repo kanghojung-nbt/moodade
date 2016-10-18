@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-xs-6" style="text-align: center">
                 <div class=today-mood" style="align-content:center">오늘의 무드에이드</div>
-                <div class='block'>
-                    <div class='mood-color'  style="align-content:center"></div>
+                <div class='block center-block'>
+                    <div class='mood-color center-block' style="align-content:center"></div>
                 </div>
 
             </div>
@@ -21,13 +21,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="moodade-verb-container">무드에이드 레시피
-                    <div class="moodade-verb-list mood-text">
-                        {% for verb in myverb %}
-                            <div>{{ verb }}</div>
-                        {% endfor %}
-                    </div>
+            <div class="col-xs-6 moodade-verb-container" style="align-content:center">무드에이드 레시피
+                <div class="moodade-verb-list mood-text">
+                    {% for verb in myverb %}
+                        <div>{{ verb }}</div>
+                    {% endfor %}
                 </div>
+            </div>
         </div>
     </div>
 

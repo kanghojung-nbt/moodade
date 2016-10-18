@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'photo.apps.PhotoConfig',
     'mood.apps.MoodConfig',
+    'moodcalendar.apps.MoodcalendarConfig'
 ]
 
 DISQUS_WEBSITE_SHORTNAME = 'pythonwebprogramming'

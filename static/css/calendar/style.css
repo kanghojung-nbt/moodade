@@ -1,0 +1,45 @@
+.wrap {
+	width: 500px;
+	/*margin: 0 auto;*/
+}
+.btn-holder {
+	text-align: center;
+	margin: 10px 0 10px 0;
+}
+#calendar table {
+	border-collapse: collapse;
+	text-align: center;
+}
+#calendar table thead td {
+	height: 60px;
+	font-weight: bold;
+}
+#calendar table td {
+	border: solid 0.5px #cccccc;
+
+}
+#calendar table td.date-cell {
+	height: 60px;
+}
+#calendar table td.sun {
+	color: red;
+}
+
+#calendar table td.not-this-month {
+	font-weight: 100;
+	color: #999;
+}
+#sClass{
+    color: #004E87;
+}
+
+#calendar table td.date-cell div {
+
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    border-color: pink;
+    text-align: center;
+    color: pink;
+    /*margin: 5%;*/
+}
