@@ -89,7 +89,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'home' %}">About</a></li>
-                <li><a href="{% url 'bookmark:index' %}">오늘의기분</a></li>
+                <li><a href="{% url 'home' %}">오늘의기분</a></li>
                 <li><a href="{% url 'blog:index' %}">컬러다이어리</a></li>
                 <li class="dropdown">
                     {% if user.is_active %}

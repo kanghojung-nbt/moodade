@@ -9,10 +9,10 @@
     <div class="moodade-subtitle" style="text-align: center"> 현재 당신의 기분은 다음과 같습니다.</div>
     <div class="conainter-fluid" style="margin-top: 10%">
         <div class="row">
-            <div class="col-xs-6" data-placement="left" title="왼쪽">
-                <div class=today-mood">오늘의 무드에이드</div>
+            <div class="col-xs-6" style="text-align: center">
+                <div class=today-mood" style="align-content:center">오늘의 무드에이드</div>
                 <div class='block'>
-                    <div class='heart'></div>
+                    <div class='mood-color'  style="align-content:center"></div>
                 </div>
 
             </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <div class="moodade-verb-container">무드에이드 레시피
-                    <div class="moodade-verb-list">
+                    <div class="moodade-verb-list mood-text">
                         {% for verb in myverb %}
                             <div>{{ verb }}</div>
                         {% endfor %}

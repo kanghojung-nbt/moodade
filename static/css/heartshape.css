@@ -1,31 +1,19 @@
+.mood-color{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border-style: solid;
+    border-color: white;
+    text-align: center;
+    background-color: pink;
+    margin: 5%;
+}
+.mood-text{
+    width: 400px;
+    height: 100px;
+    border-radius: 10px;
 
-
-.heart{
- background-color:tomato;
- width:130px;
- height:150px;
- position:relative;
- top:100px;
- left:5%;
- transform: rotate(-45deg);}
-
-.heart:before{
-  content:"";
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background-color:tomato;
-  position:absolute;
-  top:-60px;
-  left:0;}
-
-.heart:after{
-  z-index:-1;
-  content:"";
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background-color:tomato;
-  position:absolute;
-  top:0px;
-  left:60px;}
+    background-color:lavender;
+    text-align: center;
+    margin: 5%;
+}
