@@ -5,8 +5,14 @@
     border-style: solid;
     border-color: white;
     text-align: center;
-    background-color: pink;
+
+    background: radial-gradient(circle,white,pink);
+    @include sgradient(
+    $from:left,
+    $color:()
+)
     margin: 5%;
+
 }
 .mood-text{
     width: 400px;
