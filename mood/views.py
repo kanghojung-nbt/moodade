@@ -18,7 +18,14 @@ def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
         verblist ='%s' %request.POST.get('verblist',False)
         splitedverb=verblist.split(",")
-        context = {'myverb':splitedverb}
+        returndata=[]
+        for idx, val in enumerate(splitedverb):
+            if(val!=''):
+                returndata.append(int(val))
+        mymood= Mood.objects.filter(id__in=returndata)
+        context = {'myverb':mymood, 'category': mymood[0].color}
+
+        # Mood.objects.filter(mood_Verb=)
         return  render(request, 'mood/result.html', context)
 
 
