@@ -29,6 +29,8 @@ def mood_form(request):
         return  render(request, 'mood/result.html', context)
 
 
+def mood_down(request):
+    return render(request, 'mood/mood_download.html', {})
 
 
 

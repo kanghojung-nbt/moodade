@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mood.models import Mood,Emoticon,Emotion
+from mood.models import Mood,Emoticon,Emotion,moodCalendar
 
 # Register your models here.
 
@@ -12,7 +12,19 @@ class EmoticonAdmin(admin.ModelAdmin):
 class EmotionAdmin(admin.ModelAdmin):
     list_display = ('category','mood_Verb','mood_Amount')
 
+class CalendarAdmin(admin.ModelAdmin):
+    list_display = ('userid','moodDate','moodid','color','category','startNum','endNum')
+
+
 admin.site.register(Mood , MoodAdmin)
 admin.site.register(Emoticon, EmoticonAdmin)
-admin.site.register(Emotion, EmotionAdmin)
+admin.site.register(moodCalendar, CalendarAdmin)
+
+# userid = models.CharField(max_length=20, blank=False, null=False)  # id
+# moodDate = models.DateTimeField(auto_now_add=True)  # 등록한 날짜
+# moodid = models.CharField(max_length=1000)  # 저장한 무드 아이디
+# color = models.CharField(max_length=20, blank=False, null=False)  # color
+# category = models.CharField(max_length=20, blank=False, null=False)  # 기분
+# startNum = models.FloatField(default=0, null=True)  # 감정수치
+# endNum = models.FloatField(default=0, null=True)  # 감정수치
 
