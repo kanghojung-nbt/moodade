@@ -109,6 +109,7 @@
             </div>
             <div>
                 <form name="idCheckForm" method="post" action="/mood/mood_down/">
+                     {% csrf_token %}
                     <input type="text" name="id"/>
                     <a href="javascript:idCheckSubmit()">전송</a>
                 </form>
