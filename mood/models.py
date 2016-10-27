@@ -42,4 +42,7 @@ class VerbList(models.Model):   #폼으로 받을 데이터 정의 -> DB에 들�
     def __str__(self):
         return self.verblist
 
+class EmotionText(models.Model):        #사진파일 다운로드할때 볼 글귀
+    category=models.CharField(max_length=20,blank=False,null=False)  #기분
+    text = models.CharField(max_length=2000,null=False,blank=False)
 
