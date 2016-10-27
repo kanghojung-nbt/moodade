@@ -17,11 +17,16 @@
     </style>
 {% endblock %}
 {% block prescript %}
+
+      function idCheckSubmit() {
+        document.idCheckForm.submit();
+    }
 {% endblock %}
 {% block extrascript %}
     var category ="{{ category }}";
     var colordata=[];
-    var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300, "magenta":330};
+    var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
+    "magenta":330};
     console.log(category);
 
 
@@ -40,13 +45,15 @@
     //hsla(120, 100%, 50%, 0.3);
 
     console.log(last);
-   // var firstcolor= "hsla("+colorMap["{{ category }}"]+",88%, "+firstpercent+"%"+", 0.8)";
+    // var firstcolor= "hsla("+colorMap["{{ category }}"]+",88%, "+firstpercent+"%"+", 0.8)";
     var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt(first))+",88%, "+firstpercent+"%"+", 0.9)";
     console.log(firstcolor);
     var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt(last))+",98%, "+lastpercent+"%"+", 1)";
     console.log(lastcolor);
     $("#colorstart").attr("stop-color",firstcolor);
     $("#colorlast").attr("stop-color",lastcolor);
+
+
 
 {% endblock %}
 {% block content %}
@@ -100,7 +107,13 @@
             <div class="col-xs-6" data-placement="right" title="오른쪽">
                 문구 나타내고
             </div>
-            <div><a href="/mood/mood_down">dd</a></div>
+            <div>
+                <form name="idCheckForm" method="post" action="/mood/mood_download/">
+                    <input type="text" name="id"/>
+                    <a href="javascript:idCheckSubmit()">전송</a>
+                </form>
+
+            </div>
         </div>
         <div id="category" value="{{ myverb }}"></div>
         <div class="row">
@@ -114,6 +127,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 {% endblock %}
