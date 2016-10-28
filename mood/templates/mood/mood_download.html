@@ -22,6 +22,27 @@
 {% block extrascript %}
 
     $(document).ready(function(){
+
+    var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
+    "magenta":330};
+
+    var category = "{{ category }}";
+    firstpercent= parseInt(10 * {{ verbmin}}  );
+    lastpercent= parseInt(10 * {{ verbmax}}  );
+
+
+    var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt({{ verbmin }}))+",88%, "+firstpercent+"%"+", 0.2)";
+
+
+    var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt({{ verbmax }}))+",98%, "+lastpercent+"%"+", 1)";
+
+
+
+
+
+
+
+
     var drawCanvas = document.getElementById('drawCanvas');
     var drawBackup = new Array();
     if (typeof drawCanvas.getContext == 'function') {
@@ -37,17 +58,23 @@
     var text = "캔버스에 그림등이 그려졌다고 생각하시오";
 
 
+
+    var grd = ctx.createLinearGradient(0,0,200,0);
+     grd.addColorStop(0, firstcolor);
+     grd.addColorStop(1,lastcolor);
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,drawCanvas.width, drawCanvas.height);
+
+
+      ctx.fillStyle="white";
     ctx.font = "15px serif";
-    ctx.fillStyle="#ff0000";
-    ctx.fillText(text, 10, 150);
+     ctx.fillText(text, 10, 150);
+
+
     // 로컬이 아닌 세션 스토리지 사용. 생존 기간때문임.
     // 로컬스토리지는 브라우저가 닫혀도 계속 데이터를 가지고 있지만 세션 스토리지는 브라우저가 닫히면 스토리지 정보가 사라지기 떄문에.
     // 저장된 이미지 호출
-    if (sessionStorage['imgCanvas']) {
-    loadImage();
-    } else {
-    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-    }
+
 
     // Event (마우스)
     $('#drawCanvas').bind('mousedown', function(e) {
@@ -59,35 +86,10 @@
     isDraw = true;
     }
     });
-    $('#drawCanvas').bind('mousemove', function(e) {
-    var event = e.originalEvent;
-    e.preventDefault();
-    currP = { X:event.offsetX, Y:event.offsetY };
-    if(isDraw) draw_line(currP);
-    });
-    $('#drawCanvas').bind('mouseup', function(e) {
-    e.preventDefault();
-    isDraw = false;
-    });
-    $('#drawCanvas').bind('mouseleave', function(e) {
-    isDraw = false;
-    });
 
-    // Event (터치스크린)
-    $('#drawCanvas').bind('touchstart', function(e) {
-    saveCanvas();
-    e.preventDefault();
-    ctx.beginPath();
-    });
-    $('#drawCanvas').bind('touchmove', function(e) {
-    var event = e.originalEvent;
-    e.preventDefault();
-    currP = { X:event.touches[0].pageX-pDraw.left, Y:event.touches[0].pageY-pDraw.top };
-    draw_line(currP);
-    });
-    $('#drawCanvas').bind('touchend', function(e) {
-    e.preventDefault();
-    });
+
+
+
 
     // 선 그리기
     function draw_line(p) {
@@ -152,40 +154,25 @@
 {% block content %}
     <div>
         <div>
-            <canvas id="drawCanvas" width="320" height="320" style="border:1px solid #000000;">Canvas not supported
+            <canvas id="drawCanvas" width="320" height="320" >Canvas not supported
             </canvas>
         </div>
-        <div >
-            <select id="width">
-                <option value="1">1px</option>
-                <option value="2">2px</option>
-                <option value="3" selected>3px</option>
-                <option value="5">5px</option>
-                <option value="10">10px</option>
-                <option value="20">20px</option>
-            </select>
-            <select id="color">
-                <option value="#000000">검정</option>
-                <option value="#FF0000">빨강</option>
-                <option value="#00FF00">녹색</option>
-                <option value="#0000FF">파랑</option>
-                <option value="#FFFF00">노랑</option>
-                <option value="#FFFFFF">흰색</option>
-            </select>
+        <div>
             <button id="btnPrev">되돌리기</button>
             <button id="btnClea">Clear</button>
             <button id="btnSave">다운로드</button>
         </div>
     </div>
     <img id="saveImg" src="" style="display:none;"/>
-    <div style="width:100%;height:800px;">&nbsp;</div>
-
-
     <form method="post" action="/mood/result/">
         {% csrf_token %}
         <input type="text" name="verblist" id="verblist" hidden>
         <center><input type="submit" value="무드에이드 만들기" style="text-align: center" id="mood_button"></center>
     </form>
+    <div>
+        {{ verbmin }}{{ verbmax }}
+
+    </div>
 
 
 {% endblock %}
@@ -194,13 +181,4 @@
 
 
 
-
-
-
-
-<!doctype html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 

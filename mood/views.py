@@ -5,9 +5,6 @@ from mood.forms import *
 from django.views.generic.edit import FormView
 
 
-class MoodLV(ListView):
-    model = Mood
-
 
 def mood_verb(request, pEmoticon):
     mymood = Mood.objects.filter(emotion=pEmoticon)
@@ -17,6 +14,7 @@ def mood_verb(request, pEmoticon):
 def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
         verblist ='%s' %request.POST.get('verblist',False)
+        print(verblist)
         splitedverb=verblist.split(",")
         returndata=[]
         for idx, val in enumerate(splitedverb):
@@ -30,7 +28,12 @@ def mood_form(request):
 
 
 def mood_down(request):
-    return render(request, 'mood/mood_download.html', {})
+    idlist =request.POST.get('idlist',False)
+    verbmin=request.POST.get('verbmin',False)
+    verbmax = request.POST.get('verbmax', False)
+    category=request.POST.get('category', False)
+    context={'verbmin':verbmin,'verbmax':verbmax,'category':category}
+    return render(request, 'mood/mood_download.html', context)
 
 
 
@@ -40,6 +43,8 @@ def moodverb_save_page(request):
     myform = moodverb_save_page(request.POST)
     context = {'my_mood_list':myform}
     return render(request,'result.html',context)
+
+
 
 class verbFormView(FormView):
     form_class = moodverb_save_page
