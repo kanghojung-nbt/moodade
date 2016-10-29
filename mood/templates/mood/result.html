@@ -37,7 +37,7 @@
     var colordata=[];
     var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
     "magenta":330};
-    console.log(category);
+
 
 
     var firstpercent ,lastpercent;
@@ -55,7 +55,7 @@
     //hsla(120, 100%, 50%, 0.3);
 
     console.log(last);
-    // var firstcolor= "hsla("+colorMap["{{ category }}"]+",88%, "+firstpercent+"%"+", 0.8)";
+
     var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt(first))+",88%, "+firstpercent+"%"+", 0.9)";
     console.log(firstcolor);
     var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt(last))+",98%, "+lastpercent+"%"+", 1)";

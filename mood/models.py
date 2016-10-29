@@ -37,12 +37,40 @@ class moodCalendar(models.Model):
     endNum= models.FloatField(default=0, null=True)  # 감정수치
 
 
+
+
 class VerbList(models.Model):   #폼으로 받을 데이터 정의 -> DB에 들어갈 건 아니당.
     verblist=models.TextField(max_length=1000, unique=True)
     def __str__(self):
         return self.verblist
 
-class EmotionText(models.Model):        #사진파일 다운로드할때 볼 글귀
-    category=models.CharField(max_length=20,blank=False,null=False)  #기분
+class EmotionText(models.Model):        #현재 결과값
+    CATEGORY = (
+        ('red', '화남'),
+        ('purple', '지루함'),
+        ('magenta', '혐오스러움'),
+        ('green', '무서움'),
+        ('yellow', '행복함'),
+        ('orange', '흥미'),
+        ('blue', '슬퍼요'),
+        ('skyblue', '놀라워요'),
+    )
+    category = models.CharField(max_length=20, null=False, default='', choices=CATEGORY)
     text = models.CharField(max_length=2000,null=False,blank=False)
 
+class DownText(models.Model):
+    CATEGORY=(
+        ('red','화남'),
+        ('purple', '지루함'),
+        ('magenta', '혐오스러움'),
+        ('green', '무서움'),
+        ('yellow', '행복함'),
+        ('orange', '흥미'),
+        ('blue', '슬퍼요'),
+        ('skyblue', '놀라워요'),
+    )
+    text=models.CharField(max_length=2000,null=False)
+    category= models.CharField(max_length=20,null=False, default='',choices=CATEGORY)
+
+    def __str__(self):
+        return " \n현재 카테고리: " + self.category +  "\n현재 추천단어 : " + self.text

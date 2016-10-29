@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from mood.models import Mood
+from mood.models import Mood,DownText
 from mood.forms import *
 from django.views.generic.edit import FormView
 
@@ -21,6 +21,7 @@ def mood_form(request):
             if(val!=''):
                 returndata.append(int(val))
         mymood= Mood.objects.filter(id__in=returndata)
+
         context = {'myverb':mymood, 'category': mymood[0].color}
 
         # Mood.objects.filter(mood_Verb=)
@@ -31,8 +32,11 @@ def mood_down(request):
     idlist =request.POST.get('idlist',False)
     verbmin=request.POST.get('verbmin',False)
     verbmax = request.POST.get('verbmax', False)
-    category=request.POST.get('category', False)
-    context={'verbmin':verbmin,'verbmax':verbmax,'category':category}
+    mycategory=request.POST.get('category', False)
+    print(mycategory)
+    downtext = DownText.objects.filter(category=mycategory) #다운받을 글귀
+
+    context={'verbmin':verbmin,'verbmax':verbmax,'category':mycategory,'text':downtext}
     return render(request, 'mood/mood_download.html', context)
 
 

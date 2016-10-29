@@ -27,14 +27,14 @@
     "magenta":330};
 
     var category = "{{ category }}";
-    firstpercent= parseInt(10 * {{ verbmin}}  );
-    lastpercent= parseInt(10 * {{ verbmax}}  );
+    firstpercent= parseInt(10 * {{ verbmin }}  );
+    lastpercent= parseInt(10 * {{ verbmax }}  );
 
 
-    var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt({{ verbmin }}))+",88%, "+firstpercent+"%"+", 0.2)";
+    var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt({{ verbmin }}))+",88%, "+firstpercent+"%"+", 0.8)";
 
 
-    var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt({{ verbmax }}))+",98%, "+lastpercent+"%"+", 1)";
+    var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt({{ verbmax }}))+",98%, "+lastpercent+"%"+",1)";
 
 
 
@@ -60,15 +60,15 @@
 
 
     var grd = ctx.createLinearGradient(0,0,200,0);
-     grd.addColorStop(0, firstcolor);
-     grd.addColorStop(1,lastcolor);
+    grd.addColorStop(0, firstcolor);
+    grd.addColorStop(1,lastcolor);
     ctx.fillStyle=grd;
     ctx.fillRect(0,0,drawCanvas.width, drawCanvas.height);
 
 
-      ctx.fillStyle="white";
+    ctx.fillStyle="white";
     ctx.font = "15px serif";
-     ctx.fillText(text, 10, 150);
+    ctx.fillText(text, 10, 150);
 
 
     // 로컬이 아닌 세션 스토리지 사용. 생존 기간때문임.
@@ -87,6 +87,14 @@
     }
     });
 
+    var mood_text=[];
+
+
+    var textidx=0;
+    console.log("test");
+    {% for mytext in text %}
+        mood_text.push("{{ mytext.text }}");
+    {% endfor %}
 
 
 
@@ -134,13 +142,49 @@
     ctx.putImageData(drawBackup.pop(), 0, 0);
     }
 
+    function nextText() {
+    clearCanvas();
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,drawCanvas.width, drawCanvas.height);
+    ctx.fillStyle="white";
+    ctx.font = "15px serif";
+
+    textidx = (textidx+1)%mood_text.length;
+    text = mood_text[textidx];
+
+    ctx.fillText(text, 10, 150);
+    }
+
+
+    function prevText() {
+    clearCanvas();
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,drawCanvas.width, drawCanvas.height);
+    ctx.fillStyle="white";
+    ctx.font = "15px serif";
+
+    if(textidx==0)textidx=mood_text.length-1;
+    else textidx=textidx-1;
+
+    text = mood_text[textidx];
+
+    ctx.fillText(text, 10, 150);
+    }
+
+
     $('#btnPrev').click(function() {
-    prevCanvas();
+    prevText()
     });
+
+    $('#btnNext').click(function() {
+    nextText()
+    });
+
 
     $('#btnClea').click(function() {
     clearCanvas();
     });
+
 
     $('#btnSave').click(function() {
     saveImage();
@@ -154,21 +198,17 @@
 {% block content %}
     <div>
         <div>
-            <canvas id="drawCanvas" width="320" height="320" >Canvas not supported
+            <canvas id="drawCanvas" width="320" height="320">Canvas not supported
             </canvas>
         </div>
         <div>
-            <button id="btnPrev">되돌리기</button>
-            <button id="btnClea">Clear</button>
+            <button id="btnPrev">이전문구</button>
             <button id="btnSave">다운로드</button>
+            <button id="btnNext">다음문구</button>
         </div>
     </div>
     <img id="saveImg" src="" style="display:none;"/>
-    <form method="post" action="/mood/result/">
-        {% csrf_token %}
-        <input type="text" name="verblist" id="verblist" hidden>
-        <center><input type="submit" value="무드에이드 만들기" style="text-align: center" id="mood_button"></center>
-    </form>
+
     <div>
         {{ verbmin }}{{ verbmax }}
 
