@@ -7,6 +7,7 @@
 {% block extrascript %}
 var calendar = new controller();
 calendar.init();
+$("#diary").addClass("diary");
 
 function controller(target) {
 
@@ -25,7 +26,7 @@ function controller(target) {
 
 		arrTable.push('<table><colgroup>');
 		for(var i=0; i<7; i++) {
-			arrTable.push('<col width="100">');
+			arrTable.push('<col width="150">');
 		}
 		arrTable.push('</colgroup><thead><tr>');
 
@@ -54,7 +55,7 @@ function controller(target) {
 			sClass += i % 7 == 0 ? 'sun' : '';
 			sClass += i % 7 == 6 ? 'sat' : '';
 
-			arrTable.push('<td class="'+sClass+'"><div class="calendar_date">' + oStartDt.getDate() + '</div></td>');
+			arrTable.push('<td class="'+sClass+'"><div class="calendar_date"><img src="{% static 'img/calendar/calrendar.png' %}">' + oStartDt.getDate() + '</div></td>');
 			oStartDt.setDate(oStartDt.getDate() + 1);
 
 			if(i % 7 == 6) {
@@ -103,13 +104,27 @@ function controller(target) {
 
 
 {% block content %}
-    <div class='wrap'>
-        <div class='btn-holder'>
+    <div id="diary">
+    <div class='wrap'style= "float: left; padding-left: 20px; padding-right: 40px; margin-right: 50px" >
+        <div class='btn-holder' >
             <button id='btnPrev'>&lt;</button>
             <span id='currentDate'></span>
             <button id='btnNext'>&gt;</button>
         </div>
-        <div id="calendar"></div>
+        <div id="calendar" style= "float: left"></div>
     </div>
+    <div class="mymoodtext" style="margin: 20px; padding: 20px">
+        <div class="mood-date">10월 31일</div>
+        <div class="mood-color">
+            <object id="mood-svg" width="300" height="300" type="image/svg+xml" data="{% static 'img/mood/mood_result.svg' %}">
+            </object>
+        </div>
+        <div class="mood-state">지루한당신</div>
+        <form>
+            <textarea cols="60" rows="10"></textarea>
+            <button onclick="ajaxMoodText">확인</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

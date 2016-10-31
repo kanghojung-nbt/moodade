@@ -131,6 +131,15 @@
                     <input type="text" name="category" id="category" hidden>
                     <a href="javascript:idCheckSubmit()">배경화면 다운받기</a>
                 </form>
+                 <form name="CalendarSaveForm" method="post" action="/mood/mood_down/">
+                    {% csrf_token %}
+                    <input type="text" name="idlist" id="idlist" hidden/>
+                    <input type="number" name="verbmax" id="verbmax" hidden>
+                    <input type="number" name="verbmin" id="verbmin" hidden>
+                    <input type="text" name="category" id="category" hidden>
+                    <a href="javascript:idCheckSubmit()">캘린더에 결과 저장하기</a>
+                </form>
+
             </div>
 
 
@@ -147,10 +156,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 {% endblock %}
 
 
