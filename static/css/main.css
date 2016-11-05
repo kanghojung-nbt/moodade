@@ -1,0 +1,28 @@
+
+.main-logo{
+    margin-top: 20px;
+}
+.your-mood{
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+.mood-btn{
+    margin-top: 20px;
+    width:320px;
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+    background-color: #f4abc7;
+    border-radius: 25px;
+}
+.make_mood:link {
+    text-decoration: none !important;
+    color: white;
+}
+.make_mood:visited{
+    text-decoration: none !important;
+    color: white;
+}
+.make_mood:active {text-decoration: none !important; color: white;}
+.make_mood:hover {text-decoration: none !important; color: white;}

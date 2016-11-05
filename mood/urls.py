@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^emoticon/(?P<pEmoticon>.+)', mood_verb),
     url(r'^result/', mood_form),
     url(r'^mood_down/', mood_down),
+    url(r'^mood_select/', mood_select),
 
 ]

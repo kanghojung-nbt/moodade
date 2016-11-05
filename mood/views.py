@@ -11,6 +11,9 @@ def mood_verb(request, pEmoticon):
     context = {'mood_verb_list': mymood}
     return render(request, 'mood/mood_select.html', context)
 
+def mood_select(request):
+    return render(request, 'mood/select_emoticon.html', {})
+
 def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
         verblist ='%s' %request.POST.get('verblist',False)

@@ -73,7 +73,7 @@
                 <img src="{% static 'img/menu/logo_top.png' %}" style="float: left; padding-top: 10px"/>
             </a>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'home' %}">오늘의기분</a></li>
+                <li><a href="/mood/mood_select">오늘의기분</a></li>
                 <li><a href="{% url 'moodcalendar:mycalendar' %}">컬러다이어리</a></li>
                 <li class="dropdown">
                     {% if user.is_active %}
