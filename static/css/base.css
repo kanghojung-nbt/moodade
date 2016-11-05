@@ -2,12 +2,27 @@
 .navbar-default {
 
 }
-
+@font-face {
+    font-family: 'NanumGothic';
+    src: url(/static/font/KoPubDotumBold/KoPubDotumBold.ttf) format('truetype');
+}
+body{
+    font-family: NanumGothic;
+}
 .moodade-title {
+    padding-top: 10px;
     color: black;
-    font-size: 40px;
+    font-size: 24px ;
+    font-weight: bold;
     text-align: center;
 }
+.sub-title{
+    padding-top: 10px;
+    color: #7a7a7a;
+    font-size: 14px;
+
+}
+
 
 /* LINK */
 a:link, a:visited {

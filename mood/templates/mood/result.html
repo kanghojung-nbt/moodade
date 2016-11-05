@@ -65,20 +65,23 @@
     $("#idlist").val(IDlist);
     $("#verbmin").val(first);
     $("#verbmax").val(last);
-    $("#category").val(category);
+    $("#category1").val(category);
+    $("#category2").val(category);
 
 
 {% endblock %}
 {% block content %}
 
     <div class="moodade-title" style="text-align: center"> 당신의 무드에이드는?</div>
-    <div class="moodade-subtitle" style="text-align: center"> 현재 당신의 기분은 다음과 같습니다.</div>
-    <div class="conainter-fluid" style="margin-top: 10%">
-        <div class="row">
-            <div class="col-xs-6" style="text-align: center">
-                <div class=today-mood" style="align-content:center">오늘의 무드에이드</div>
-                <div class='block center-block'>
-                    <svg wedth="300px" height="300px"  version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+    <div class="moodade-subtitle" style="text-align: center"> 오늘 당신의 기분은 어떤 색인가요?</div>
+    <div class="conainter-fluid" style="margin-top: 5%">
+    <div class="row">
+    <div class="col-xs-6" style="text-align: center">
+        <div class=today-mood" style="align-content:center"><img class=""
+                                                                 src="{% static 'img/menu/today_moodade.png' %}">
+        </div>
+        <div class='block center-block' style="margin-top: 40px">
+            <svg width="200px" height="200px"  version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
 	 y="0px" viewBox="0 0 198.3 198.3" style="enable-background:new 0 0 198.3 198.3;" xml:space="preserve">
 
       <linearGradient id="MyGradient"  x1="0%" x2="0%" y1="0%" y2="100%" >
@@ -87,8 +90,7 @@
       </linearGradient>
 
 
-
-<circle class="st0" cx="99.2" cy="99.2" r="60.9" stroke="red" stroke-width="3"  id="backcircle"/>
+<circle class="st0" cx="99.2" cy="99.2" r="98.9"/>
 <g>
 	<path class="st1" d="M132.3,74.2c-1.7-0.1-3.3,0.5-4.6,1.7c-2.6,2.4-2.8,6.4-0.4,9c1.2,1.3,2.7,2,4.4,2.1c0.1,0,0.2,0,0.3,0
 		c1.6,0,3.1-0.6,4.3-1.7c1.3-1.2,2-2.7,2.1-4.4c0.1-1.7-0.5-3.3-1.7-4.6C135.6,75,134,74.3,132.3,74.2z M134.3,83.1
@@ -113,47 +115,45 @@
 		c15.6,0,24.6,13.2,25.5,26.3C151.9,94.6,150.3,100.8,147.9,106.3z"/>
 </g>
 </svg>
-
-                </div>
-
+            <div id="category" value="{{ myverb }}" style="margin-top: 40px"></div>
+            <div class="moodade-verb-list mood-text">
+                <div class="mood-recipe">무드에이드 레시피</div>
+                <hr class="large" color="red">
+                {% for verb in myverb %}
+                    {{ verb.mood_Verb }}  &nbsp;&nbsp;
+                {% endfor %}
             </div>
-            <div class="col-xs-6" data-placement="right" title="오른쪽">
-                문구 나타내고
-            </div>
-
-
-            <div>
-                <form name="idCheckForm" method="post" action="/mood/mood_down/">
-                    {% csrf_token %}
-                    <input type="text" name="idlist" id="idlist" hidden/>
-                    <input type="number" name="verbmax" id="verbmax" hidden>
-                    <input type="number" name="verbmin" id="verbmin" hidden>
-                    <input type="text" name="category" id="category" hidden>
-                    <a href="javascript:idCheckSubmit()">배경화면 다운받기</a>
-                </form>
-                 <form name="CalendarSaveForm" method="post" action="/mood/mood_down/">
-                    {% csrf_token %}
-                    <input type="text" name="idlist" id="idlist" hidden/>
-                    <input type="number" name="verbmax" id="verbmax" hidden>
-                    <input type="number" name="verbmin" id="verbmin" hidden>
-                    <input type="text" name="category" id="category" hidden>
-                    <a href="javascript:idCheckSubmit()">캘린더에 결과 저장하기</a>
-                </form>
-
-            </div>
-
 
         </div>
-        <div id="category" value="{{ myverb }}"></div>
-        <div class="row">
 
-            <div class="col-xs-6 moodade-verb-container" style="align-content:center">무드에이드 레시피
-                <div class="moodade-verb-list mood-text">
-                    {% for verb in myverb %}
-                        {{ verb.mood_Verb }},
-                    {% endfor %}
-                </div>
-            </div>
+    </div>
+    <div class="col-xs-6" title="오른쪽">
+        <div class="your-mood">지루한 당신</div>
+        <div class="anothers-mood">현재 OO 명의 사람들이 당신과<Br>
+            같은 기분을 느끼고 있어요.<br><br>
+            감정을 어루만져 줄 문구와 함께<br>
+            나만의 색이 담긴 배경화면을 만들어 보세요!
+        </div>
+
+        <div style="padding-left: 60px; padding-top:20px;">
+            <form name="idCheckForm"  method="post" action="/mood/mood_down/">
+                {% csrf_token %}
+                <input type="text" name="idlist" id="idlist" hidden/>
+                <input type="number" name="verbmax" id="verbmax" hidden>
+                <input type="number" name="verbmin" id="verbmin" hidden>
+                <input type="text" name="category" id="category1" hidden>
+                <input type="submit" onclick="idCheckSubmit()"value="배경화면 만들러 가기" class="ct-btn">
+            </form>
+        </div>
+        <div style="padding-left: 60px; padding-top:10px; margin-bottom:20px">
+            <form name="CalendarSaveForm" method="post" action="/mood/mood_down/">
+                {% csrf_token %}
+                <input type="text" name="idlist" id="idlist" hidden/>
+                <input type="number" name="verbmax" id="verbmax" hidden>
+                <input type="number" name="verbmin" id="verbmin" hidden>
+                <input type="text" name="category" id="category2" hidden>
+                <input type="submit" onclick="idCheckSubmit()"value="캘린더에 결과 저장하기" class="clandr-btn">
+            </form>
         </div>
     </div>
 {% endblock %}

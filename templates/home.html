@@ -22,28 +22,18 @@
 
 
 {% block content %}
+    <center>
+        <div class="step1"><img class="" src="{% static 'img/menu/step1.png' %}"></div>
+    </center>
     <div class="moodade-title">
         오늘 당신의 기분은 어떠한가요?
     </div>
-    <div class="conainter-fluid" style="margin-top: 10%">
-        <div class="row">
-            <div class="col-xs-3" id="mood-angry" data-toggle="tooltip" data-placement="left" title="화가 났어요!">
-                <a href="./mood/emoticon/angry"><img class="" src="{% static 'img/emoticon/angry.svg' %}"
-                                                     alt="Third slide"></a>
-            </div>
-            <div class="col-xs-3" id="boring" data-toggle="tooltip" data-placement="right" title="따분해요">
-                <a href="./mood/emoticon/boring"><img class="" src="{% static 'img/emoticon/boring.svg' %}"
-                                                      alt="Third slide"></a>
-            </div>
-            <div class="col-xs-3" id="disgust" data-toggle="tooltip" data-placement="left" title="역겨워요">
-                <a href="./mood/emoticon/disgust"><img class="" src="{% static 'img/emoticon/disgust.svg' %}"
-                                                       alt="Third slide"></a>
-            </div>
-            <div class="col-xs-3" id="fear" data-toggle="tooltip" data-placement="left" title="무서워요">
-                <a href="./mood/emoticon/fear"><img class="" src="{% static 'img/emoticon/fear.svg' %}"
-                                                    alt="Third slide"></a>
-            </div>
+    <center>
+        <div class="sub-title">
+            지금 당신의 기분과 가장 가까운 이모티콘을 선택해주세요.
         </div>
+    </center>
+    <div class="conainter-fluid" style="margin-top: 3%">
         <div class="row">
             <div class="col-xs-3" id="happy" data-toggle="tooltip" data-placement="left" title="행복해요">
                 <a href="./mood/emoticon/happy"><img class="" src="{% static 'img/emoticon/happy.svg' %}"
@@ -53,14 +43,36 @@
                 <a href="./mood/emoticon/interesting"><img class="" src="{% static 'img/emoticon/interesting.svg' %}"
                                                            alt="Third slide"></a>
             </div>
-            <div class="col-xs-3" id="sadness" data-toggle="tooltip" data-placement="left" title="슬퍼요">
-                <a href="./mood/emoticon/sadness"><img class="" src="{% static 'img/emoticon/sadness.svg' %}"
-                                                       alt="Third slide"></a>
-            </div>
             <div class="col-xs-3" id="surprise" data-toggle="tooltip" data-placement="left" title="놀라워요">
                 <a href="./mood/emoticon/surprise"><img class="" src="{% static 'img/emoticon/surprise.svg' %}"
                                                         alt="Third slide"></a>
             </div>
+            <div class="col-xs-3" id="fear" data-toggle="tooltip" data-placement="left" title="무서워요">
+                <a href="./mood/emoticon/fear"><img class="" src="{% static 'img/emoticon/fear.svg' %}"
+                                                    alt="Third slide"></a>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-xs-3" id="mood-angry" data-toggle="tooltip" data-placement="left" title="화가 났어요!">
+                <a href="./mood/emoticon/angry"><img class="" src="{% static 'img/emoticon/angry.svg' %}"
+                                                     alt="Third slide"></a>
+            </div>
+            <div class="col-xs-3" id="sadness" data-toggle="tooltip" data-placement="left" title="슬퍼요">
+                <a href="./mood/emoticon/sadness"><img class="" src="{% static 'img/emoticon/sadness.svg' %}"
+                                                       alt="Third slide"></a>
+            </div>
+            <div class="col-xs-3" id="boring" data-toggle="tooltip" data-placement="right" title="따분해요">
+                <a href="./mood/emoticon/boring"><img class="" src="{% static 'img/emoticon/boring.svg' %}"
+                                                      alt="Third slide"></a>
+            </div>
+            <div class="col-xs-3" id="disgust" data-toggle="tooltip" data-placement="left" title="역겨워요">
+                <a href="./mood/emoticon/disgust"><img class="" src="{% static 'img/emoticon/disgust.svg' %}"
+                                                       alt="Third slide"></a>
+            </div>
+
+
         </div>
     </div>
 

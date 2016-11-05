@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 def mood_verb(request, pEmoticon):
     mymood = Mood.objects.filter(emotion=pEmoticon)
     context = {'mood_verb_list': mymood}
-    return render(request, 'mood/mood_test.html', context)
+    return render(request, 'mood/mood_select.html', context)
 
 def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
@@ -32,7 +32,9 @@ def mood_down(request):
     idlist =request.POST.get('idlist',False)
     verbmin=request.POST.get('verbmin',False)
     verbmax = request.POST.get('verbmax', False)
-    mycategory=request.POST.get('category', False)
+    mycategory ='%s' %request.POST.get('category',False)
+    print("test")
+    print(idlist)
     print(mycategory)
     downtext = DownText.objects.filter(category=mycategory) #다운받을 글귀
 
