@@ -266,24 +266,32 @@
                     <center><div class="sub-title">원하는 문구를 선택하거나 입력해 주세요.</div></center>
 
                     <div class ="select-menu" >
-                              <div style="position: absolute ; left :20px ;top :40%"> <img class="" id="btnPrev" src="{% static 'img/menu/left.png' %}" style="float: left"></div>
-                              <center><div class ="nowtext" id="displayText" name="nowtext" style="line-height:200% ; position: absolute ; left :40px ;top :30% ; right: 40px";  >  </div></center>
-                              <div width="5%" style="position: absolute ; right :20px ;top :40%"> <img class="" id="btnNext"src="{% static 'img/menu/right.png' %}"></div>
-
-                            <div   style="position: absolute ;float:  left;  left: 10% ;bottom :10%">
-                                <textarea cols="50" lows="20" id=" CustomText"> </textarea>
-                                <input type="submit" id="btnCustom" value="확인"style="position: relative ; left: 15px ;top :5%">
+                              <div style="position: absolute ; left :20px ;top :40%">
+                                  <img class="" id="btnPrev" src="{% static 'img/menu/left.png' %}" style="float: left">
+                              </div>
+                              <center>
+                                  <div class ="nowtext" id="displayText" name="nowtext" style="line-height:200% ; position: absolute ; left :40px ;top :25% ; right: 40px";  >
+                                  </div>
+                              </center>
+                              <div width="5%" style="position: absolute ; right :20px ;top :40%">
+                                  <img class="" id="btnNext"src="{% static 'img/menu/right.png' %}">
+                              </div>
+                                <div   style="position: absolute ;float:  left;  left: 20% ;bottom :20%">
+                                <textarea cols="40" lows="50" id=" CustomText"> </textarea>
+                                <input type="submit" id="btnCustom" value="확인"style="position: relative ; left: 15px ;bottom: 10%">
                             </div>
-
-
-
                     </div>
-
-
-
-
                 </div>
+                <div style="margin-top: 20px">
 
+                    <center>
+                         <div>회원가입하고 더 많은 서비스 이용해보기</div>
+                         <div style="margin-bottom: 5px">
+                            <button id="btnMain">메인화면으로</button>
+                            <button id="btnRegister">회원가입</button>
+                         </div>
+                    </center>
+                </div>
             </div>
         </div>
         <div>
