@@ -1,12 +1,31 @@
 from django.views.generic.base import TemplateView
+from django.contrib.auth.models import User, Group
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from mysite.serializers import UserSerializer, GroupSerializer
+
 
 # Create your views here.
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    사용자(user)를 보거나 편집하는 API
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    그룹(group)을 보거나 편집하는 API
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
 
 #--- TemplateView
 class HomeView(TemplateView):

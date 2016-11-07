@@ -45,8 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'photo.apps.PhotoConfig',
     'mood.apps.MoodConfig',
-    'moodcalendar.apps.MoodcalendarConfig'
+    'moodcalendar.apps.MoodcalendarConfig',
+    #REST FRAMEWORK
+    'rest_framework',
+    'snippets.apps.SnippetsConfig',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    'PAGINATE_BY': 10
+}
+
 
 DISQUS_WEBSITE_SHORTNAME = 'pythonwebprogramming'
 SITE_ID = 1
