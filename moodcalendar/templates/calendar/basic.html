@@ -9,6 +9,8 @@ var calendar = new controller();
 calendar.init();
 $("#diary").addClass("diary");
 
+$(".not-this-month").empty();
+
 function controller(target) {
 
 	var that = this;
@@ -55,7 +57,7 @@ function controller(target) {
 			sClass += i % 7 == 0 ? 'sun' : '';
 			sClass += i % 7 == 6 ? 'sat' : '';
 
-			arrTable.push('<td class="'+sClass+'"><div class="calendar_date"><img src="{% static 'img/calendar/calrendar.png' %}">' + oStartDt.getDate() + '</div></td>');
+			arrTable.push('<td class="'+sClass+'"><div class="calendar_date">' + oStartDt.getDate() + '<img src="{% static 'img/calendar/calrendar.png' %}"></div></td>');
 			oStartDt.setDate(oStartDt.getDate() + 1);
 
 			if(i % 7 == 6) {
@@ -70,6 +72,8 @@ function controller(target) {
 		$('#calendar').html(arrTable.join(""));
 
 		that.changeMonth();
+        $(".not-this-month").empty();
+
 	}
 
     /* Next, Prev 버튼 이벤트 */
@@ -113,17 +117,16 @@ function controller(target) {
         </div>
         <div id="calendar" style= "float: left"></div>
     </div>
-    <div class="mymoodtext" style="margin: 20px; padding: 20px">
+
+    <div class="mymoodtext" style="margin-left: 40px; padding: 20px">
         <div class="mood-date">10월 31일</div>
         <div class="mood-color">
             <object id="mood-svg" width="300" height="300" type="image/svg+xml" data="{% static 'img/mood/mood_result.svg' %}">
             </object>
         </div>
         <div class="mood-state">지루한당신</div>
-        <form>
-            <textarea cols="60" rows="10"></textarea>
+            <textarea cols="30" rows="10"></textarea>
             <button onclick="ajaxMoodText">확인</button>
-        </form>
     </div>
 </div>
 

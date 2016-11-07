@@ -1,9 +1,9 @@
 .wrap {
-	width: 500px;
+	width: 60%;
 	/*margin: 0 auto;*/
 }
 .diary{
-	border:1px solid red;
+	border:1px solid #ebebeb;
 }
 .btn-holder {
 	text-align: center;
@@ -23,7 +23,7 @@
 	height: 80px;
 }
 #calendar table td.sun {
-	color: red;
+	color: #dddddd;
 }
 
 #calendar table td.not-this-month {
@@ -35,12 +35,11 @@
 }
 
 #calendar table td.date-cell div {
-
-    width: 20px;
-    height: 20px;
+    width: 80px;
+    height: 80px;
     /*border-radius: 100%;*/
     border-color: pink;
-    text-align: center;
+	padding-top: 0px;
     color: pink;
     /*margin: 5%;*/
 }
