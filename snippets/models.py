@@ -8,6 +8,14 @@ LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 
+class Keyboard(models.Model):
+    button= models.CharField(max_length=100)
+    def __str__(self):
+        return self.button
+
+
+
+
 class KaKAoMood(models.Model):
     mood = models.CharField(max_length=10)
     category = models.CharField(max_length=10)

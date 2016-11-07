@@ -1,9 +1,11 @@
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import  APIView
 from rest_framework.response import Response
-from snippets.models import Snippet,Stock
-from snippets.serializers import SnippetSerializer,StockSerializer
+from snippets.models import Snippet,Stock,Keyboard
+from snippets.serializers import SnippetSerializer,StockSerializer,ButtonSerializer
+from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 
 # Lists all stocks or create a new one
@@ -16,22 +18,37 @@ class StockList(APIView):
         return Response(serializer.data)
     def post(self):
         pass
+#button
+
+class ButtonList(APIView):
+    def get(self,request):
+        buttons =Keyboard.objects.all()
+        type = "buttons"
+        serializer = ButtonSerializer(buttons, many=True)
+        return Response(serializer.data)
+    def post(self):
+        pass
+
 
 def KaKaoList(APIView):
     pass
 
-@api_view(['GET'])
-def snippet_list(request):
+
+class SnippetList(APIView):
     """
-       전체 코드 조각 리스트 조회
+    코드 조각을 모두 보여주거나 새 코드 조각을 만듭니다.
     """
-    try:
-        snippet = Snippet.objects.all()
-    except Snippet.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'GET':
-        serializer = SnippetSerializer(snippet)
+    def get(self, request, format=None):
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def snippet_detail(request, pk):

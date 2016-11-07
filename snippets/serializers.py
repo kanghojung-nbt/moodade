@@ -1,13 +1,19 @@
 from django.forms import widgets
 from rest_framework import serializers
 from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
-from .models import Stock
+from .models import Stock,Keyboard
 
 
 class StockSerializer(serializers.ModelSerializer):
     class Meta:
         model= Stock
         fields = '__all__'
+
+class ButtonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Keyboard
+        fields='__all__'
+
 
 
 
