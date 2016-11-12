@@ -19,9 +19,6 @@
 }
 #calendar table td {
 }
-#calendar table td.date-cell {
-	height: 100px;
-}
 #calendar table td.sun {
 	color: #dddddd;
 }
@@ -39,7 +36,7 @@
     height: 80px;
     /*border-radius: 100%;*/
     border-color: pink;
-	padding-top: 0px;
+	padding: 15px;
     color: pink;
     /*margin: 5%;*/
 }

@@ -7,7 +7,7 @@ from django.conf import settings
 #기존 테이블 분리
 class MyCalendar(models.Model):
     user = models.CharField(max_length=40)
-    moodDate = models.DateTimeField(auto_now_add=True)  # 등록한 날짜
+    moodDate = models.DateTimeField(auto_now_add=False)  # 등록한 날짜
     moodid = models.CharField(max_length=1000)  # 저장한 무드 아이디
     color = models.CharField(max_length=20, blank=False, null=False)  # color
     category = models.CharField(max_length=20, blank=False, null=False)  # 기분

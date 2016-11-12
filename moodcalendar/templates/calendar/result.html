@@ -90,12 +90,14 @@
                         sClass += i % 7 == 6 ? 'sat' : '';
                         var curDate = oStartDt.getDate();
                         curDate = String(curDate);
+                        if(curDate.length==1)
+                            curDate='0'+curDate;
 
                         //ajax로 받아온것을
 
 
 
-                            arrTable.push('<td class="' + sClass + '"><div class="calendar_date" id="date_' + oStartDt.getDate() + '">' + oStartDt.getDate() + '<img src="{% static 'img/calendar/calrendar.png' %}"></div></td>');
+                            arrTable.push('<td class="' + sClass + '"><div class="calendar_date" id="date_' + curDate + '">' + oStartDt.getDate() + '<img src="{% static 'img/calendar/calrendar.png' %}"></div></td>');
 
                         oStartDt.setDate(oStartDt.getDate() + 1);
 
@@ -176,7 +178,7 @@
                                 var first= parseFloat( calendarmap[key].minNum);
                                 var last = parseFloat( calendarmap[key].maxNum);
                                 a = $(t);
-                                console.log(calendarmap[key]);
+
                                 var gradienttext=' '
                                 var firstpercent ,lastpercent;
                                  firstpercent= parseInt(10 * first);
@@ -185,9 +187,13 @@
                                 var lastcolor = "hsla("+( parseInt(colorMap[color])+parseInt(last))+",98%, "+lastpercent+"%"+", 1)";
 
 
-                                 a.html('12<svg width="60" height="60"> <linearGradient id="MyGradient"  x1="0%" x2="0%" y1="0%" y2="100%" >  <stop offset="10%" id="colorstart" stop-color="'+firstcolor+'" /> <stop offset="90%" id="colorlast"  stop-color="'+lastcolor+'" /></linearGradient> <circle cx="30" cy="30" r="30"  fill="url(#MyGradient)" /></svg>');
-                                $("#colorstart").attr("stop-color",firstcolor);
-                                $("#colorlast").attr("stop-color",lastcolor);
+                                 a.html(key+'<svg width="60" height="60"> <linearGradient id="MyGradient'+key+'"  x1="0%" x2="0%" y1="0%" y2="100%" >  <stop offset="10%" id="colorstart'+key+'" stop-color="'+firstcolor+'" /> <stop offset="90%" id="colorlast'+key+'"  stop-color="'+lastcolor+'" /></linearGradient> <circle cx="30" cy="30" r="30"  fill="url(#MyGradient'+key+')" /></svg>');
+                                var cs= "#colorstart"+key;
+                                var ls = "#colorlast"+key;
+                                console.log(key);
+                                console.log(firstcolor);
+                                $(cs).attr("stop-color",firstcolor);
+                                $(ls).attr("stop-color",lastcolor);
 
 
                             });
