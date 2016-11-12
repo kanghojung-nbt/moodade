@@ -16,7 +16,9 @@ def mood_select(request):
 
 def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
+        k=(request.POST.get('verblist', False))
         verblist ='%s' %request.POST.get('verblist',False)
+        print(k);
         print(verblist)
         splitedverb=verblist.split(",")
         returndata=[]
@@ -26,7 +28,6 @@ def mood_form(request):
         mymood= Mood.objects.filter(id__in=returndata)
 
         context = {'myverb':mymood, 'category': mymood[0].color}
-
         # Mood.objects.filter(mood_Verb=)
         return  render(request, 'mood/result.html', context)
 
@@ -36,11 +37,10 @@ def mood_down(request):
     verbmin=request.POST.get('verbmin',False)
     verbmax = request.POST.get('verbmax', False)
     mycategory ='%s' %request.POST.get('category',False)
-    print("test")
+
     print(idlist)
     print(mycategory)
     downtext = DownText.objects.filter(category=mycategory) #다운받을 글귀
-
     context={'verbmin':verbmin,'verbmax':verbmax,'category':mycategory,'text':downtext}
     return render(request, 'mood/mood_download.html', context)
 

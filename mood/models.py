@@ -27,16 +27,6 @@ class Mood(models.Model):
     def __str__(self):
         return " 현재 감정 단어: "  + self.mood_Verb  + "\n현재 감정 : "+self.emotion  + "\n현재 감정 색깔: "+self.color
 
-class moodCalendar(models.Model):
-    userid=models.CharField(max_length=20,blank=False,null=False)  #id
-    moodDate=models.DateTimeField(auto_now_add=True)    #등록한 날짜
-    moodid= models.CharField(max_length=1000)           #저장한 무드 아이디
-    color=models.CharField(max_length=20,blank=False,null=False)  #color
-    category = models.CharField(max_length=20,blank=False,null=False)  #기분
-    startNum=models.FloatField(default=0, null=True)  # 감정수치
-    endNum= models.FloatField(default=0, null=True)  # 감정수치
-
-
 
 
 class VerbList(models.Model):   #폼으로 받을 데이터 정의 -> DB에 들어갈 건 아니당.

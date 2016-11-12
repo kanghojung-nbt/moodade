@@ -22,6 +22,10 @@
     function idCheckSubmit() {
     document.idCheckForm.submit();
     }
+    function calendarSubmit() {
+
+     document.CalendarSaveForm.submit();
+    }
 {% endblock %}
 {% block extrascript %}
 
@@ -63,8 +67,11 @@
     $("#colorstart").attr("stop-color",firstcolor);
     $("#colorlast").attr("stop-color",lastcolor);
     $("#idlist").val(IDlist);
+    $("#idlist2").val(IDlist);
     $("#verbmin").val(first);
     $("#verbmax").val(last);
+    $("#verbmin2").val(first);
+    $("#verbmax2").val(last);
     $("#category1").val(category);
     $("#category2").val(category);
 
@@ -146,13 +153,13 @@
             </form>
         </div>
         <div style="padding-left: 60px; padding-top:10px; margin-bottom:20px">
-            <form name="CalendarSaveForm" method="post" action="/mood/mood_down/">
+            <form name="CalendarSaveForm" method="post" action="/moodcalendar/">
                 {% csrf_token %}
-                <input type="text" name="idlist" id="idlist" hidden/>
-                <input type="number" name="verbmax" id="verbmax" hidden>
-                <input type="number" name="verbmin" id="verbmin" hidden>
+                <input type="text" name="idlist" id="idlist2" hidden/>
+                <input type="number" name="verbmax" id="verbmax2" hidden>
+                <input type="number" name="verbmin" id="verbmin2" hidden>
                 <input type="text" name="category" id="category2" hidden>
-                <input type="submit" onclick="idCheckSubmit()"value="캘린더에 결과 저장하기" class="clandr-btn">
+                <input type="submit" onclick="calendarSubmit()"value="캘린더에 결과 저장하기" class="clandr-btn">
             </form>
         </div>
     </div>

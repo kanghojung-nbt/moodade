@@ -9,10 +9,11 @@ class StockSerializer(serializers.ModelSerializer):
         model= Stock
         fields = '__all__'
 
-class ButtonSerializer(serializers.ModelSerializer):
+
+class ButtonSerializer(serializers.Serializer):
     class Meta:
         model=Keyboard
-        fields='__all__'
+        fields=['button',]
 
 
 

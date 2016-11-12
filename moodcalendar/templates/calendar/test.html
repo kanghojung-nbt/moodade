@@ -1,0 +1,18 @@
+<script>
+var a=[];
+    {% for data in mydata %}
+        a.push(
+        {{ data.user }}
+        {{ data.moodid }}
+        {{ data.moodDate }}
+        {{ data.maxNum }}
+        );
+    {% endfor %}
+alert(a);
+
+</script>
+
+
+<div id="result">
+
+</div>

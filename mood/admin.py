@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mood.models import Mood,Emoticon,Emotion,moodCalendar,EmotionText,DownText
+from mood.models import Mood,Emoticon,Emotion,EmotionText,DownText
 
 # Register your models here.
 
@@ -12,8 +12,7 @@ class EmoticonAdmin(admin.ModelAdmin):
 class EmotionAdmin(admin.ModelAdmin):
     list_display = ('category','mood_Verb','mood_Amount')
 
-class CalendarAdmin(admin.ModelAdmin):
-    list_display = ('userid','moodDate','moodid','color','category','startNum','endNum')
+
 class EmotionTextAdmin(admin.ModelAdmin):
     list_display =('category', 'text')
 class DownTextAdmin(admin.ModelAdmin):
@@ -22,7 +21,7 @@ class DownTextAdmin(admin.ModelAdmin):
 
 admin.site.register(Mood , MoodAdmin)
 admin.site.register(Emoticon, EmoticonAdmin)
-admin.site.register(moodCalendar, CalendarAdmin)
+
 admin.site.register(EmotionText, EmotionTextAdmin)
 admin.site.register(DownText, DownTextAdmin)
 

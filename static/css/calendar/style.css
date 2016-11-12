@@ -3,7 +3,7 @@
 	/*margin: 0 auto;*/
 }
 .diary{
-	border:1px solid #ebebeb;
+
 }
 .btn-holder {
 	text-align: center;
@@ -20,7 +20,7 @@
 #calendar table td {
 }
 #calendar table td.date-cell {
-	height: 80px;
+	height: 100px;
 }
 #calendar table td.sun {
 	color: #dddddd;
@@ -34,7 +34,7 @@
     color: #004E87;
 }
 
-#calendar table td.date-cell div {
+#calendar table td.date-cell  {
     width: 80px;
     height: 80px;
     /*border-radius: 100%;*/

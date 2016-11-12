@@ -5,32 +5,12 @@
     var ourverb = [];
     function idCheckSubmit() {
     // alert("test");
-    document.idCheckForm.submit();
+    $("#target").submit();
 
     }
 {% endblock %}
 {% block  extra_head %}
     <!-- Plugin -->
-    <script>
-
-        $('[id="mood_verb"]').mousedown(function (e) {
-            var dataid= $(this).attr('name');
-            var verbid=dataid.split("mood_verb")[1];
-            var idx = ourverb.indexOf(verbid);
-            if(idx ==-1) { // 값이 없다면
-                ourverb.push(verbid);
-                $(this).css("border-color", "pink");
-                console.log(verbid);
-            }
-            else {
-                console.log("제거");
-                ourverb.splice(idx, 1);
-                $(this).css("border-color", "black");
-            }
-        console.log(ourverb);
-        })
-
-    </script>
 
 
 {% endblock %}
@@ -61,7 +41,6 @@
         })
 
     $('[id="mood_button"]').mousedown(function (e) {
-
          $('#verblist').val(ourverb);
          $('#target').submit();
      })
@@ -106,7 +85,7 @@
     <form method="post" action="/mood/result/" id="target">
         {% csrf_token %}
         <input type="text" name="verblist" id="verblist" hidden>
-        <center><input type="submit" onclick="idCheckSubmit()" value="무드에이드 만들기" style="text-align: center" id="mood_button" ></center>
+        <center><a href="javascript:idCheckSubmit()" id="mood_button" class="mood_button" >무드에이드 만들기</a></center>
     </form>
 
 

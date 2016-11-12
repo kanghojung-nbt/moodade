@@ -1,1 +1,237 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ko">
+
+<head>
+    <link rel="stylesheet" href="{% static "css/calendar/style.css" %}">
+    <style>
+
+
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="{% static "js/ajax_csrf.js" %}"></script>
+    <script type="text/javascript">
+
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        $(function () {
+            var csrftoken = getCookie('csrftoken');
+            var calendarmap = new Object();
+             var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
+                 "magenta":330};
+
+            var calendar = new controller();
+            calendar.init();
+            $("#diary").addClass("diary");
+            $(".not-this-month").empty();
+
+            function controller(target) {
+                var that = this;
+                var m_oMonth = new Date();
+
+                m_oMonth.setDate(1);
+
+                this.init = function () {
+                    that.renderCalendar();
+
+                }
+
+                /* 달력 UI 생성 */
+                this.renderCalendar = function () {
+                    calendarmap=new Object();
+                    that.ajax_Calendar();
+                    var arrTable = [];
+                    arrTable.push('<table >');
+                    arrTable.push('<tr id="date_picker"><td colspan="7"><button id="btnPrev">&lt;</button><span id="currentDate"></span><button id="btnNext">&gt;</button></td><td>스케쥴러</td></tr>');
+                    var arrWeek = "일월화수목금토".split("");
+
+                    for (var i = 0, len = arrWeek.length; i < len; i++) {
+                        var sClass = '';
+                        sClass += i % 7 == 0 ? 'sun' : '';
+                        sClass += i % 7 == 6 ? 'sat' : '';
+                        arrTable.push('<td class="' + sClass + '"><div class="calendar_date" >'
+                                + arrWeek[i] + '</div></td>');
+                    }
+                    arrTable.push('<td rowspan="6">여기는 일기장</td>');
+                    arrTable.push('</tr>');
+
+                    var oStartDt = new Date(m_oMonth.getTime());
+                    // 1일에서 1일의 요일을 빼면 그 주 첫번째 날이 나온다.
+                    oStartDt.setDate(oStartDt.getDate() - oStartDt.getDay());
+                    console.log(calendarmap);
+                    for (var i = 0; i < 100; i++) {
+                        if (i % 7 == 0) {
+                            arrTable.push('<tr>');
+                        }
+
+                        var sClass = 'date-cell '
+                        sClass += m_oMonth.getMonth() != oStartDt.getMonth() ? 'not-this-month ' : '';
+                        sClass += i % 7 == 0 ? 'sun' : '';
+                        sClass += i % 7 == 6 ? 'sat' : '';
+                        var curDate = oStartDt.getDate();
+                        curDate = String(curDate);
+
+                        //ajax로 받아온것을
+
+
+
+                            arrTable.push('<td class="' + sClass + '"><div class="calendar_date" id="date_' + oStartDt.getDate() + '">' + oStartDt.getDate() + '<img src="{% static 'img/calendar/calrendar.png' %}"></div></td>');
+
+                        oStartDt.setDate(oStartDt.getDate() + 1);
+
+                        if (i % 7 == 6) {
+                            arrTable.push('</tr>');
+                            if (m_oMonth.getMonth() != oStartDt.getMonth()) {
+                                break;
+                            }
+                        }
+                    }
+
+
+                    arrTable.push('</table>');
+                    $('#calendar').html(arrTable.join(""));
+                    $('#btnPrev').click(that.onPrevCalendar);
+                    $('#btnNext').click(that.onNextCalendar);
+                    $('#ajaxs').click(that.ajax_Calendar);
+                    that.changeMonth();
+                    $(".not-this-month").empty(); //이번달이 아닌건 없앤다.
+
+                }
+
+
+                /* 이전 달력 */
+                this.onPrevCalendar = function () {
+
+                    m_oMonth.setMonth(m_oMonth.getMonth() - 1);
+                    that.renderCalendar();
+                }
+
+                /* 다음 달력 */
+                this.onNextCalendar = function () {
+
+                    m_oMonth.setMonth(m_oMonth.getMonth() + 1);
+                    that.renderCalendar();
+                }
+
+                /* 달력 이동되면 상단에 현재 년 월 다시 표시 */
+                this.changeMonth = function () {
+                    $('#currentDate').text(that.getYearMonth(m_oMonth).substr(0, 9));
+                }
+
+                /* 날짜 객체를 년 월 문자 형식으로 변환 */
+                this.getYearMonth = function (oDate) {
+                    return oDate.getFullYear() + '년 ' + (oDate.getMonth() + 1) + '월';
+                }
+                this.ajax_Calendar = function () {
+                    var year = m_oMonth.getFullYear();
+                    var month = m_oMonth.getMonth() + 1;
+                    var lastday = new Date(year, month, 0).getDate();
+                    $.ajax({
+                        type: 'POST',
+                        url: '/moodcalendar/ajaxCalendr/',
+                        data: {'thisyear': year, 'thismonth': month, 'lastday': lastday},
+                        datatype: 'json',
+                        beforeSend: function (xhr, settings) {  //data가 다 오지 않았을때의 처리
+                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        },
+
+                        success: function (result) {  //data가 다 오지 않았을때의 처리
+                            var obj = jQuery.parseJSON(result)
+                            var test = result;
+                            var str = new String();
+
+                            $.each(obj, function (key, value) {
+                                str = obj[key].fields.moodDate;
+                                var res = str.split("T");
+                                res = res[0].split("-")
+                                var myres = (res[2]);
+                                calendarmap[myres] = obj[key].fields;
+                            });
+
+                            $.each(calendarmap, function (key, value) {
+                                t = "#date_" + key;
+                                var color= calendarmap[key].color;
+                                var first= parseFloat( calendarmap[key].minNum);
+                                var last = parseFloat( calendarmap[key].maxNum);
+                                a = $(t);
+                                console.log(calendarmap[key]);
+                                var gradienttext=' '
+                                var firstpercent ,lastpercent;
+                                 firstpercent= parseInt(10 * first);
+                                 lastpercent = parseInt(10* last);
+                                var firstcolor= "hsla("+(colorMap[color]-parseInt(first))+",88%, "+firstpercent+"%"+", 0.9)";
+                                var lastcolor = "hsla("+( parseInt(colorMap[color])+parseInt(last))+",98%, "+lastpercent+"%"+", 1)";
+
+
+                                 a.html('12<svg width="60" height="60"> <linearGradient id="MyGradient"  x1="0%" x2="0%" y1="0%" y2="100%" >  <stop offset="10%" id="colorstart" stop-color="'+firstcolor+'" /> <stop offset="90%" id="colorlast"  stop-color="'+lastcolor+'" /></linearGradient> <circle cx="30" cy="30" r="30"  fill="url(#MyGradient)" /></svg>');
+                                $("#colorstart").attr("stop-color",firstcolor);
+                                $("#colorlast").attr("stop-color",lastcolor);
+
+
+                            });
+                        },
+
+
+                    });
+                }
+            }
+
+
+        });
+
+
+    </script>
+
+
+</head>
+
+<body role="document">
+
+<div id="calendar"></div>
+<button id="ajaxs">ajax</button>
+<div id="testaj"></div>
+
+<svg width="60" height="60">
+  <circle cx="30" cy="30" r="30"  fill="yellow" />
+</svg>
+
+</svg>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+{% block bottomscript %}{% endblock %}
+</body>
+</html>
