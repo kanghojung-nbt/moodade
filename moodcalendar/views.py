@@ -25,13 +25,8 @@ def ajaxCalendr(request):
         lastday = int(request.POST.get('lastday', False))
         start_date = datetime(year, month, 1)
         end_date = datetime(year, month, 30)
-
-
         mydata = MyCalendar.objects.filter(moodDate__range=(start_date, end_date), user=request.user)
-        print (mydata)
         mydata= serializers.serialize('json', mydata)
-
-
         return JsonResponse(mydata,safe=False)
 
 def mycalendar(request):
@@ -40,11 +35,12 @@ def mycalendar(request):
     calendarlist=MyCalendar.objects.all()
     if request.method == 'POST':  # 만약 폼 의해 제출
         idlist = request.POST.get('idlist', False)
+        print(idlist)
         verbmin = request.POST.get('verbmin', False)
         verbmax = request.POST.get('verbmax', False)
         color= '%s' % request.POST.get('category', False)
         mycategory = '%s' % request.POST.get('category', False)
         MyCalendar.objects.create(user=request.user.username,  moodid=idlist, color=mycategory, category='angry',maxNum=verbmax, minNum=verbmin)
         context={'idlist':idlist,'verbmin':verbmin,'verbmax':verbmax,'mycategory':mycategory,'color':color,'calendarlist':calendarlist}
-        print(calendarlist)
+
     return render(request, 'calendar/basic.html',{} )

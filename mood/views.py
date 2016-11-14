@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 
 
 def mood_verb(request, pEmoticon):
-    mymood = Mood.objects.filter(emotion=pEmoticon)
+    mymood = Mood.objects.filter(emotion=pEmoticon).order_by('?')[0:20]
     context = {'mood_verb_list': mymood}
     return render(request, 'mood/mood_select.html', context)
 
