@@ -6,7 +6,7 @@
 
 {% block myextrastyle %}<script src="{% static "js/makeSVG.js" %}"></script>{% endblock %}
 {% block extrascript %}
-  function csrfSafeMethod(method) {
+   function csrfSafeMethod(method) {
             // these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
@@ -47,7 +47,7 @@
 
                 this.init = function () {
                     that.renderCalendar();
-                    $("#moodday").text(thisday+"일");
+                    $("#todate").text(thisday+"일");
                 }
 
                 /* 달력 UI 생성 */
@@ -56,8 +56,21 @@
                     that.ajax_Calendar();
                     var arrTable = [];
                     arrTable.push('<table >');
-                    arrTable.push('<tr id="date_picker"><td colspan="7"><button id="btnPrev">&lt;</button><span id="currentDate"></span><button id="btnNext">&gt;</button></td><td ></td></tr>');
-                    var arrWeek = "일월화수목금토".split("");
+                    arrTable.push('<tr id="date_picker"><td colspan="7"><button id="btnPrev">&lt;</button><span id="currentDate"></span><button id="btnNext">&gt;</button><span id = "selectMonth">' +
+                                    '<span id="month1">1</span>' +
+                                    '<span id="month2">2</span>' +
+                                    '<span id="month3">3</span>' +
+                                    '<span id="month4">4</span>' +
+                                    '<span id="month5">5</span>' +
+                                    '<span id="month6">6</span>' +
+                                    '<span id="month7">7</span>' +
+                                    '<span id="month8">8</span>' +
+                                    '<span id="month9">9</span>' +
+                                    '<span id="month10">10</span>' +
+                                    '<span id="month11">11</span>' +
+                                    '<span id="month12">12</span>' +
+                            '</span></td><td id="todate"></td></tr>');
+                    var arrWeek = "SUN MON TUE WEN TUR FRI SAT".split(" ");
 
                     for (var i = 0, len = arrWeek.length; i < len; i++) {
                         var sClass = '';
@@ -67,13 +80,13 @@
                                 + arrWeek[i] + '</div></td>');
                     }
                     arrTable.push('<td rowspan="6">' +'<div class="moodday" id="moodday"></div>'+
-                            '<div><object id="circle-svg"  type="image/svg+xml" data="{% static 'img/mood/mood_result.svg' %}"></object></div><div id="daymood"></div><div id="diary"></div></td>');
+                            '<div id="renderingSVG"><object id="circle-svg"  type="image/svg+xml" data="{% static 'img/result/mood_result.svg' %}" ></object></div><div id="daymood"></div><div id="diary"></div></td>');
                     arrTable.push('</tr>');
 
                     var oStartDt = new Date(m_oMonth.getTime());
                     // 1일에서 1일의 요일을 빼면 그 주 첫번째 날이 나온다.
                     oStartDt.setDate(oStartDt.getDate() - oStartDt.getDay());
-
+                    console.log(calendarmap);
                     for (var i = 0; i < 100; i++) {
                         if (i % 7 == 0) {
                             arrTable.push('<tr>');
@@ -91,7 +104,7 @@
 
 
 
-                            arrTable.push('<td class="' + sClass + '"><div class="calendar_date" id="date_' + curDate + '">' +  oStartDt.getDate() + '<img id="img_'+curDate+'" src="{% static 'img/calendar/calrendar.png' %}"></div></td>');
+                            arrTable.push('<td class="' + sClass + '"><div class="calendar_date" id="date_' + curDate + '"><svg width="60" height="60"><circle id="circle_'+curDate +'" cx="30" cy="30" r="30"  fill="#ebebeb" /> <text x="20" y="35"  font-size="18" fill="#c6c6c6" > '+curDate+' </text></svg></div></td>');
 
                         oStartDt.setDate(oStartDt.getDate() + 1);
 
@@ -110,6 +123,8 @@
                     $('#btnNext').click(that.onNextCalendar);
                     $('#ajaxs').click(that.ajax_Calendar);
                     that.changeMonth();
+
+                    that.renderMemo();
 
 
                     $(".not-this-month").empty(); //이번달이 아닌건 없앤다.
@@ -161,7 +176,7 @@
 
                 /*테스트 */
                 this.renderMemo =function(){
-                    str ='<textarea id="test" readonly="readonly" cols="30" rows="10"></textarea>'
+                    str ='<textarea placeholder="당신의 기분을 메모로 남겨주세요" rows="20" name="comment[text]" id="comment_text" cols="20" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>'
                     $("#diary").html(str)
                 }
                  this.setEmoticon = function (oDate) {
@@ -177,11 +192,13 @@
 
                     var svgDoc = svg.contentDocument;
                     var colorstart = svgDoc.getElementById("colorstart");
+                     console.log(colorstart);
                     var colorlast = svgDoc.getElementById("colorlast");
                     var gra = svgDoc.getElementById("MyGradient");
 
                     colorstart.setAttributeNS(null,"stop-color",firstcolor);
                     colorlast.setAttributeNS(null,"stop-color",lastcolor);
+                     $("#renderingSVG").html($("#hiddenmood").html());
                 }
                 /* 클릭하면  */
                 this.setDiary= function(data){
@@ -237,37 +254,41 @@
 
 
 
-                                a.html(key+'<svg width="60" height="60"> <linearGradient id="MyGradient'+key+'"  x1="0%" x2="0%" y1="0%" y2="100%" >  <stop offset="10%" id="colorstart'+key+'" stop-color="'+firstcolor+'" /> <stop offset="90%" id="colorlast'+key+'"  stop-color="'+lastcolor+'" /></linearGradient> <circle id="circle_'+key +'" cx="30" cy="30" r="30"  fill="url(#MyGradient'+key+')" /></svg>');
+                                a.html('<svg width="60" height="60"> <linearGradient id="MyGradient'+key+'"  x1="0%" x2="0%" y1="0%" y2="100%" >  <stop offset="10%" id="colorstart'+key+'" stop-color="'+firstcolor+'" /> <stop offset="90%" id="colorlast'+key+'"  stop-color="'+lastcolor+'" /></linearGradient> <circle id="circle_'+key +'" cx="30" cy="30" r="30"  fill="url(#MyGradient'+key+')" /> <text x="20" y="35"  font-size="18" fill="white" > '+key+' </text></svg>');
                                 var cs= "#colorstart"+key;
                                 var ls = "#colorlast"+key;
                                 $(cs).attr("stop-color",firstcolor);
                                 $(ls).attr("stop-color",lastcolor);
-                                that.setEmoticon();
-                                that.setDiary();
+
 
                             });
                              $("[id^='circle_']").bind("click", function(e){
+                                  console.log(  $("#hiddenmood").html());
                                    k=(e.target.id.split("circle_")[1]);
                                  thisday=k;
-
-                                   $("#moodday").text(thisday+"일");
+                                 that.renderMemo();
+                                  that.setDiary();
+                                   $("#todate").text(thisday+"일");
                                     var color= calendarmap[thisday].color;
                                     var first= parseFloat( calendarmap[thisday].minNum);
                                     var last = parseFloat( calendarmap[thisday].maxNum);
                                     var svg = document.getElementById("circle-svg");
-
+                                   var svgDoc = svg.contentDocument;
+                                    console.log(svgDoc);
                                    var firstcolor = makeColor(first, color);
                                    var lastcolor = makeColor(last, color);
 
-                                    var svgDoc = svg.contentDocument;
+                                    var gra = svgDoc.getElementById("MyGradient");
                                     var colorstart = svgDoc.getElementById("colorstart");
                                     var colorlast = svgDoc.getElementById("colorlast");
-                                    var gra = svgDoc.getElementById("MyGradient");
+
 
                                     colorstart.setAttributeNS(null,"stop-color",firstcolor);
                                     colorlast.setAttributeNS(null,"stop-color",lastcolor);
-                                    that.setDiary();
-                                    that.renderMemo();
+
+
+
+
                                 });
                         },
 
@@ -275,10 +296,7 @@
                     });
                 }
             }
-
-
         });
-
 {% endblock %}
 
 <script>
@@ -289,6 +307,6 @@
    <div id="calendar"></div>
 
 <div id="testaj"></div>
-
+<object id="circle-svg"  type="image/svg+xml" data="{% static 'img/result/mood_result.svg' %}" hidden></object>
 
 {% endblock %}

@@ -27,7 +27,7 @@ def mood_form(request):
                 returndata.append(int(val))
         mymood= Mood.objects.filter(id__in=returndata)
 
-        context = {'myverb':mymood, 'category': mymood[0].color}
+        context = {'myverb':mymood, 'category': mymood[0].color,'emoticon':mymood[0].emotion}
         # Mood.objects.filter(mood_Verb=)
         return  render(request, 'mood/result.html', context)
 

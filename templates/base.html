@@ -73,6 +73,7 @@
                 <img src="{% static 'img/menu/logo_top.png' %}" style="float: left; padding-top: 10px"/>
             </a>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/mood/mood_select">무드 에이드란?</a></li>
                 <li><a href="/mood/mood_select">오늘의기분</a></li>
                 <li><a href="{% url 'moodcalendar:mycalendar' %}">컬러다이어리</a></li>
                 <li class="dropdown">
@@ -101,6 +102,13 @@
     </div><!--/.container -->
 </nav><!--/.navbar -->
 
+
+<div class="container-fluid">
+    {% block mainhome %}{% endblock %}
+</div> <!-- /container -->
+
+
+
 <div class="container">
     {% block content %}{% endblock %}
 </div> <!-- /container -->
@@ -110,7 +118,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <hr class="small">
                     <p>
                         <a href="">about MoodAde</a> ｜
                         <a href="">이용안내</a> ｜
