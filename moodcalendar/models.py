@@ -1,6 +1,6 @@
 
 from django.db import models
-
+from datetime import datetime
 from django.conf import settings
 # Create your models here.
 
@@ -16,5 +16,15 @@ class MyCalendar(models.Model):
     mydiary = models.TextField(default=0,null=True)
     def __str__(self):
         return   "현재 감정 색깔: "+self.color+"\n"
+
+class Memo(models.Model):
+    user = models.CharField(max_length=40)
+    moodDate= models.CharField(max_length=20,null=False)
+    memo = models.TextField(default='')
+    def __str__(self):
+        return   "ID : "+self.user\
+                 +"  날짜 : "+self.moodDate+\
+                 "  memo : "+self.memo+"\n"
+
 
 

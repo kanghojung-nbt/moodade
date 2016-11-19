@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from moodcalendar.models import  *
+from moodcalendar.models import  Memo,MyCalendar
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 from datetime import datetime
@@ -24,10 +24,50 @@ def ajaxCalendr(request):
         month = int(request.POST.get('thismonth', False))
         lastday = int(request.POST.get('lastday', False))
         start_date = datetime(year, month, 1)
-        end_date = datetime(year, month, 30)
+        end_date = datetime(year, month, lastday)
         mydata = MyCalendar.objects.filter(moodDate__range=(start_date, end_date), user=request.user)
         mydata= serializers.serialize('json', mydata)
         return JsonResponse(mydata,safe=False)
+
+def readMemo(request):              #날짜를 클릭했을때 메모를 보여준다.
+    if request.is_ajax():
+        myear = str(request.POST.get('year', False))
+        mmonth = str(request.POST.get('month', False))
+        mday = str(request.POST.get('day', False))
+        date = myear + ':' + mmonth + ':' + mday
+        data = Memo.objects.filter(
+            user=request.user.username,
+            moodDate=date
+        )
+        if data.exists():
+            data= data[0].memo
+        else:
+            data = ""
+        return HttpResponse(data)
+
+def makeOrUpdateMemo(request):             #
+    if request.is_ajax():
+        myear = str(request.POST.get('year', False))
+        mmonth = str(request.POST.get('month', False))
+        mday = str(request.POST.get('day', False))
+        memo = request.POST.get('memo', False)
+        date = myear+':'+mmonth+':'+mday
+        print(date)
+        a = Memo.objects.filter(
+            user=request.user.username,
+            moodDate=date
+        )
+        if a.exists():
+            k =Memo.objects.get(user=request.user.username, moodDate=date)
+            k.memo=memo
+            k.save()
+        else:
+            Memo.objects.create(user=request.user.username, memo=memo, moodDate=date)
+
+        return HttpResponse(memo)
+
+
+
 
 def mycalendar(request):
     if not request.user.is_authenticated():

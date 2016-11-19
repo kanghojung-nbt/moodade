@@ -73,7 +73,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
-
+DATE_INPUT_FORMATS = ("%Y.%m.%d")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

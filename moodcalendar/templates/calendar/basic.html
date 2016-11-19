@@ -26,6 +26,35 @@
             }
             return cookieValue;
         }
+        function ajax_Memo() {
+             var csrftoken = getCookie('csrftoken');
+             var data = $("#currentDate").text().split(" ");
+            var year = data[0].split("년")[0];
+            var month = data[1].split("월")[0];
+              //  내가 텍스트area 에 입력한 값들을 읽어 들인다.
+            var day = $("#todate").text().split("일")[0];
+
+            var memo=  $("#mymemo").val() ;
+                    console.log(year + month + day + memo);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/moodcalendar/write/',
+                        data: {'year': year, 'month': month, 'day': day , 'memo':memo},
+                        datatype: 'json',
+                        beforeSend: function (xhr, settings) {  //data가 다 오지 않았을때의 처리
+                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        },
+
+                        success: function (result) {  //data가 다 도착 하였을때.
+                            console.log(result);
+                            var test = result;
+                            var str = new String();
+
+                        }
+                    });
+                }
 
         $(function () {
             var csrftoken = getCookie('csrftoken');
@@ -42,6 +71,7 @@
             function controller(target) {
                 var that = this;
                 var m_oMonth = new Date();
+                var selectedDay=1;
 
                 m_oMonth.setDate(1);
 
@@ -56,7 +86,8 @@
                     that.ajax_Calendar();
                     var arrTable = [];
                     arrTable.push('<table >');
-                    arrTable.push('<tr id="date_picker"><td colspan="7"><button id="btnPrev">&lt;</button><span id="currentDate"></span><button id="btnNext">&gt;</button><span id = "selectMonth">' +
+                    arrTable.push('<tr id="date_picker"><td class="topline" colspan="7"><a id="btnPrev"><img class="Prev" src="{% static 'img/menu/left.png' %} "> ' +
+                            '</a>&nbsp;&nbsp;<span id="currentDate"></span>&nbsp;&nbsp;<a id="btnNext"><img class="Next" src="{% static 'img/menu/right.png' %} "></a><span id = "selectMonth">' +
                                     '<span id="month1">1</span>' +
                                     '<span id="month2">2</span>' +
                                     '<span id="month3">3</span>' +
@@ -69,7 +100,8 @@
                                     '<span id="month10">10</span>' +
                                     '<span id="month11">11</span>' +
                                     '<span id="month12">12</span>' +
-                            '</span></td><td id="todate"></td></tr>');
+                            '</span><hr class="ttt"> </td><td id="todate">' +
+                            '</td></tr>');
                     var arrWeek = "SUN MON TUE WEN TUR FRI SAT".split(" ");
 
                     for (var i = 0, len = arrWeek.length; i < len; i++) {
@@ -79,9 +111,13 @@
                         arrTable.push('<td class="' + sClass + '"><div class="calendar_date" >'
                                 + arrWeek[i] + '</div></td>');
                     }
-                    arrTable.push('<td rowspan="6">' +'<div class="moodday" id="moodday"></div>'+
+                    arrTable.push('<td class="rightTable" rowspan="6">' +'<div class="moodday" id="moodday"></div>'+
                             '<div id="renderingSVG"><object id="circle-svg"  type="image/svg+xml" data="{% static 'img/result/mood_result.svg' %}" ></object></div><div id="daymood"></div><div id="diary"></div></td>');
                     arrTable.push('</tr>');
+
+
+
+
 
                     var oStartDt = new Date(m_oMonth.getTime());
                     // 1일에서 1일의 요일을 빼면 그 주 첫번째 날이 나온다.
@@ -123,9 +159,10 @@
                     $('#btnNext').click(that.onNextCalendar);
                     $('#ajaxs').click(that.ajax_Calendar);
                     that.changeMonth();
-
                     that.renderMemo();
-
+                       var tdata = $("#currentDate").text().split(" ");
+                        var tmonth = tdata[1].split("월")[0];
+                      var thisMonthID =  $("#month"+tmonth).attr("class" ,"thisMonth")
 
                     $(".not-this-month").empty(); //이번달이 아닌건 없앤다.
 
@@ -148,12 +185,14 @@
                     }
                     else thisday="1";
 
+                    var tdata = $("#currentDate").text().split(" ");
+                    var tmonth = tdata[1].split("월")[0];
+                    var thisMonthID =  $("#month"+tmonth).attr("class" ,"")
                     that.renderCalendar();
                 }
 
                 /* 다음 달력 */
                 this.onNextCalendar = function () {
-
                     m_oMonth.setMonth(m_oMonth.getMonth() + 1);
                     if(that.isThisMonth(m_oMonth.getMonth())) {
                         thisday = String(sibal.getDate());
@@ -161,6 +200,9 @@
 
                     }
                     else thisday="1";
+                     var tdata = $("#currentDate").text().split(" ");
+                    var tmonth = tdata[1].split("월")[0];
+                    var thisMonthID =  $("#month"+tmonth).attr("class" ,"")
                     that.renderCalendar();
                 }
 
@@ -176,7 +218,8 @@
 
                 /*테스트 */
                 this.renderMemo =function(){
-                    str ='<textarea placeholder="당신의 기분을 메모로 남겨주세요" rows="20" name="comment[text]" id="comment_text" cols="20" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>'
+                    str ='<textarea id="mymemo"  placeholder="당신의 기분을 메모로 남겨주세요" rows="20" name="comment[text]" id="comment_text" cols="20" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea><div  ><a href="javascript:ajax_Memo()" id= "btnMemoOK" class="mood_button">확인</a></div>'
+
                     $("#diary").html(str)
                 }
                  this.setEmoticon = function (oDate) {
@@ -211,6 +254,32 @@
                     return day;
                 }
 
+                this.ajax_Read=function () {
+                       var data = $("#currentDate").text().split(" ");
+                        var year = data[0].split("년")[0];
+                        var month = data[1].split("월")[0];
+                     var day = $("#todate").text().split("일")[0];
+                    var memo=  $("#mymemo").val() ;
+                    console.log(year + month + day + memo);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/moodcalendar/read/',
+                        data: {'year': year, 'month': month, 'day': day },
+                        datatype: 'json',
+                        beforeSend: function (xhr, settings) {  //data가 다 오지 않았을때의 처리
+                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        },
+                        success: function (result) {  //data가 다 도착 하였을때.
+                            $("#mymemo").text(result);
+                            var test = result;
+                        }
+                    });
+
+
+                }
+
                 this.ajax_Calendar = function () {
                     var year = m_oMonth.getFullYear();
                     var month = m_oMonth.getMonth() + 1;
@@ -226,7 +295,7 @@
                             }
                         },
 
-                        success: function (result) {  //data가 다 오지 않았을때의 처리
+                        success: function (result) {  //data가 다 도착 하였을때.
                             var obj = jQuery.parseJSON(result)
                             var test = result;
                             var str = new String();
@@ -263,7 +332,7 @@
 
                             });
                              $("[id^='circle_']").bind("click", function(e){
-                                  console.log(  $("#hiddenmood").html());
+                                console.log(  $("#hiddenmood").html());
                                    k=(e.target.id.split("circle_")[1]);
                                  thisday=k;
                                  that.renderMemo();
@@ -274,7 +343,7 @@
                                     var last = parseFloat( calendarmap[thisday].maxNum);
                                     var svg = document.getElementById("circle-svg");
                                    var svgDoc = svg.contentDocument;
-                                    console.log(svgDoc);
+
                                    var firstcolor = makeColor(first, color);
                                    var lastcolor = makeColor(last, color);
 
@@ -285,8 +354,7 @@
 
                                     colorstart.setAttributeNS(null,"stop-color",firstcolor);
                                     colorlast.setAttributeNS(null,"stop-color",lastcolor);
-
-
+                                    that.ajax_Read();
 
 
                                 });
