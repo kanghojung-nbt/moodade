@@ -18,7 +18,7 @@ def calendar(request):
 @csrf_protect
 def ajaxCalendr(request):
     if not request.user.is_authenticated():
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+        return redirect('%s' % (settings.LOGIN_URL))
     if request.is_ajax():
         year =  int(request.POST.get('thisyear',False))
         month = int(request.POST.get('thismonth', False))

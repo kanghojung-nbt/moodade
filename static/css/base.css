@@ -6,6 +6,9 @@
 @font-face {
     font-family: 'NanumGothic';
     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.ttf) format('truetype');
+     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.eot) format('truetype');
+     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.woff) format('truetype');
+
 }
 
 body {
@@ -15,7 +18,7 @@ body {
 
 footer {
     margin-top: 3%;
-    font-family: 'KoPubDotumMedium';
+    font-family: 'NanumGothic';
     font-size: 11px;
     text-align: center;
 }

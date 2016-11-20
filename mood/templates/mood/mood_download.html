@@ -17,7 +17,11 @@
 {% block extrascript %}
 
     $(document).ready(function(){
+    var agent = navigator.userAgent.toLowerCase();
 
+    if (agent.indexOf("msie") == -1) {
+        $("#CustomText").attr("cols" ,25);
+    }
     var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
     "magenta":330};
 
@@ -277,7 +281,7 @@
                                   <img class="" id="btnNext"src="{% static 'img/menu/right.png' %}">
                               </div>
                                 <div   style="position: absolute ;float:  left;  left: 20% ;bottom :20%">
-                                <textarea cols="40" lows="50" id=" CustomText"> </textarea>
+                                <textarea cols="40" lows="40" id="CustomText" style="float:left"> </textarea>
                                 <input type="submit" id="btnCustom" value="확인"style="position: relative ; left: 15px ;bottom: 10%">
                             </div>
                     </div>

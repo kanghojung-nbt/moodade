@@ -27,9 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
-
 # to use in django.contrib.auth.views.login function
 LOGIN_REDIRECT_URL = '/'
 

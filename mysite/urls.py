@@ -22,24 +22,17 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
                   url(r'^rest-test', include(router.urls)),
-                  url(r'^mySign/', registerView, name=''),
                   url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
                   url(r'^', include('snippets.urls')),
                   url(r'^admin/', include(admin.site.urls)),
-                  # url(r'^accounts/', include('django.contrib.auth.urls')),
+                    # 로그인 회원가입 인증부분.
+                  url(r'^accounts/', include('django.contrib.auth.urls'),  name='login'),
                   url(r'^accounts/register/',registerView, name='register'),
                   url(r'^signup_ok/', TemplateView.as_view(
                     template_name='home.html'
                     ), name='signup_ok'),
 
-                  url(r'^accounts/', include('django.contrib.auth.urls'),  name='login'),
-
-
-                  # url(r'^accounts/register/done/$', UserCreateDoneTV.as_view(), name='register_done'),
-
                   url(r'^$', HomeView.as_view(), name='home'),
-
-
                   url(r'^mood/', include('mood.urls', namespace='mood')),
                   url(r'^moodcalendar/', include('moodcalendar.urls', namespace='moodcalendar')),
 
