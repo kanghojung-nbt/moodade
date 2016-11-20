@@ -4,42 +4,67 @@
 
 {% load staticfiles %}
 {% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+{% block myextrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}"/>
 
+{% endblock %}
+
+{% block extrascript %}
+    $("#id_username").attr("size",30);
+    $("#id_username").attr("placeholder","아이디");
+    $("#id_password1").attr("size",30);
+    $("#id_password1").attr("placeholder","비밀번호");
+    $("#id_password2").attr("size",30);
+    $("#id_password2").attr("placeholder","비밀번호 재확인");
+
+
+{% endblock extrascript %}
 {% block content %}
-<div id="content">
 
-    <h1>회원가입</h1>
+    <table class="formtable">
+        <tr>
+            <td colspan="2" class="your-mood"><h3>무드에이드 회원가입</h3></td>
+        </tr>
+        <tr>
+            <td class="test">
+                <img src="{% static 'img/menu/main_logo.png' %}">
+            </td>
+            <td class="test">
+                <form action="{% url 'register' %}" method="post" class="loginform">{% csrf_token %}
+                    {% if form.errors %}
+                        <p class="errornote">Wrong! Please correct the error(s) below.</p>
+                    {% endif %}
+                    <table class="logininput">
+                        <tr>
+                            <td>{{ signupform.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ signupform.password1 }}</td>
+                        </tr>
+                         <tr>
+                            <td>{{ signupform.password2 }}</td>
+                        </tr>
 
-    <form method="post" action="."> {% csrf_token %}
+                         <tr>
+                            <td>
+                                <div>{{ signupform.email }}</div>
+                                <div>{{ signupform.nickName }}</div>
+                                 <input style="margin-top: 10px" type="submit" value="가입하기"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <script type="text/javascript">document.getElementById("id_username").focus();</script>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
 
-    {% if form.errors %}
-    <p class="errornote">Wrong! Please correct the error(s) below.</p>
-    {% endif %}
-    
-    <p> 정확한 정보를 입력해 주세요.</p>
-    
-    <fieldset class="aligned">
-    
-        <div class="form-row">
-            {{ form.username.label_tag }} {{ form.username }}
-        </div>
-        
-        <div class="form-row">
-            {{ form.password1.label_tag }} {{ form.password1 }}
-        </div>
-        
-        <div class="form-row">
-            {{ form.password2.label_tag }} {{ form.password2 }}
-        </div>
-    
-    </fieldset>
-    
-    <div class="submit-row">
-        <input type="submit" value="Register"/>
-    </div>
-    
-    <script type="text/javascript">document.getElementById("id_username").focus();</script>
-    </form>
+            </td>
+        </tr>
 
-</div>
+    </table>
+
+
 {% endblock %}

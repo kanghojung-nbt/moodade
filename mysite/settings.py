@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/accounts/login'
+LOGOUT_URL = '/accounts/logout/'
+
+# to use in django.contrib.auth.views.login function
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -38,12 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # shkim
-    'bookmark.apps.BookmarkConfig',
-    'blog.apps.BlogConfig',
+
+
     'tagging.apps.TaggingConfig',
     'disqus',
     'django.contrib.sites',
-    'photo.apps.PhotoConfig',
     'mood.apps.MoodConfig',
     'moodcalendar.apps.MoodcalendarConfig',
     #REST FRAMEWORK

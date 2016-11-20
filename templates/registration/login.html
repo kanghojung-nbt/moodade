@@ -4,38 +4,72 @@
 
 {% load staticfiles %}
 {% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+{% block myextrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"/>
 
+{% endblock %}
+{% block extrascript %}
+    $("#id_username").attr("size",30);
+    $("#id_username").attr("placeholder","아이디");
+    $("#id_password").attr("size",30);
+    $("#id_password").attr("placeholder","비밀번호");
+    $("#id_password").attr("line-height",2);
+
+{% endblock extrascript %}
 {% block content %}
-<div id="content">
 
-    <h1>Please Login </h1>
-    <form action="." method="post">{% csrf_token %}
-    {% if form.errors %}
-    <p class="errornote">Wrong! Please correct the error(s) below.</p>
-    {% endif %}
+    <table class="formtable">
+        <tr>
+            <td colspan="2" class="your-mood"> 무드에이드 로그인</td>
+        </tr>
+        <tr>
+            <td class="test">
+                <img src="{% static 'img/menu/main_logo.png' %}">
+            </td>
+            <td class="test">
+                <form action="{% url 'login' %}" method="post" class="loginform">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <p class="errornote">ID 나 비밀번호가 일치하지 않습니다. </p>
+                    {% endif %}
+                    {% if next %}
+                        {% if user.is_authenticated %}
+                            <p>권한이 없는 페이지에 접근하였으니, 권한이 있는 계정으로 로그인하세요.</p>
+                        {% else %}
+                            <p>이 페이지를 보려면 로그인을 해야 합니다.</p>
+                        {% endif %}
+                    {% endif %}
+                    <table class="logininput">
+                        <tr>
+                            <td>{{ form.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.password }}</td>
+                        </tr>
+                    </table>
 
-    <p>Please enter your id and password.</p>
+                    <label style="float: left;">
+                        <input type="checkbox" class="option-input radio"/>&nbsp;&nbsp;아이디 저장
+                        <input type="checkbox" class="option-input radio" name="IDCookie">&nbsp;&nbsp;로그인 상태 유지
+                    </label>
+                    <br><br>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                    <script type="text/javascript">document.getElementById('id_username').focus();</script>
 
-    <fieldset class="aligned">
+                        <br><br> <input type="submit" style="float: left; margin-top: 5%" value="로그인"/>
+                        <div style="margin-right: 50% ;margin-top: 14% ;padding-top: 5%; padding-bottom:10% ">asd | 비밀번호 찾기 | 회원가입</div>
+                    </form>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
 
-        <div class="form-row">
-            {{ form.username.label_tag }} {{ form.username }}
-        </div>
-    
-        <div class="form-row">
-            {{ form.password.label_tag }} {{ form.password }}
-        </div>
+            </td>
+        </tr>
 
-    </fieldset>
+    </table>
 
-    <div class="submit-row">
-        <input type="submit" value="Log In"/>
-        <!-- input type="hidden" name="next" value="/" / -->
-        <input type="hidden" name="next" value="{{ next }}" />
-    </div>
 
-    <script type="text/javascript">document.getElementById('id_username').focus();</script>
-    </form>
 
-</div>
 {% endblock %}

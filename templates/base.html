@@ -40,7 +40,10 @@
 
 
 
-            {% block extrascript %}{% endblock %}
+            {% block extrascript %}
+
+
+            {% endblock %}
 
 
         });
@@ -83,16 +86,17 @@
                             <span class="glyphicon glyphicon-user"></span> {% firstof user.get_short_name user.get_username %}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'password_change' %}">Change Password</a></li>
-                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                            <li><a href="{% url 'password_change' %}">마이페이지</a></li>
+                            <li><a href="{% url 'password_change' %}">비밀번호 변경</a></li>
+                            <li><a href="{% url 'logout' %}">로그아웃</a></li>
                         </ul>
                     {% else %}
                         <a class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
                             <span class="glyphicon glyphicon-user"></span> Who?</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'login' %}">Login</a></li>
-                            <li><a href="{% url 'register' %}">Register</a></li>
+                            <li><a href="{% url 'login' %}">로그인</a></li>
+                            <li><a href="{% url 'register' %}">회원가입</a></li>
                         </ul>
                     {% endif %}
                 </li>
@@ -106,7 +110,6 @@
 <div class="container-fluid">
     {% block mainhome %}{% endblock %}
 </div> <!-- /container -->
-
 
 
 <div class="container">
@@ -127,7 +130,7 @@
 
 
                     <p>
-                         <img class="icon" src="{% static 'img/menu/phone.png' %}"> 010-4901-6415　
+                        <img class="icon" src="{% static 'img/menu/phone.png' %}"> 010-4901-6415　
 
                         <a href="mailto:70hojung@gmail.com">
                             <img class="icon" src="{% static 'img/menu/email.png' %}"> contact@gmail.com　</a>

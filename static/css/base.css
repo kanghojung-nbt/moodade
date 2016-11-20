@@ -22,12 +22,15 @@ footer {
 
 
 .mood_button {
+    margin-top: 60px;
     background-color: #f4abc7;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    border-radius: 12px;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    display: inline-block;
     cursor: pointer;
     color: #ffffff;
+    font-family: Arial;
     font-size: 18px;
     font-weight: bold;
     padding: 13px 37px;
@@ -47,7 +50,21 @@ footer {
     top: 1px;
 }
 
+.moodade-title {
+    padding-top: 20px;
+    margin-bottom: 30px;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
 
+.sub-title {
+    padding-top: 10px;
+    color: #7a7a7a;
+    font-size: 14px;
+
+}
 
 table.change-list, table.change-list th, table.change-list td {
     border: 1px solid #ccc;
