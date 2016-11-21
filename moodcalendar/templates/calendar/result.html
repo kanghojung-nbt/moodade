@@ -237,8 +237,8 @@
                     var last = parseFloat( calendarmap[thisday].maxNum);
                     var svg = document.getElementById("circle-svg");
 
-                    var firstcolor = makeColor(first, color);
-                    var lastcolor = makeColor(last, color);
+                    var firstcolor = makeColor(first, color,"min");
+                    var lastcolor = makeColor(last, color,"max");
 
                     var svgDoc = svg.contentDocument;
                     var colorstart = svgDoc.getElementById("colorstart");
@@ -325,8 +325,8 @@
                                 var gradienttext=' '
 
 
-                                var firstcolor= makeColor(first,color);
-                                var lastcolor = makeColor(last,color);
+                                var firstcolor= makeColor(first,color,"min");
+                                var lastcolor = makeColor(last,color,"max");
 
 
 
@@ -351,8 +351,8 @@
                                     var svg = document.getElementById("circle-svg");
                                    var svgDoc = svg.contentDocument;
 
-                                   var firstcolor = makeColor(first, color);
-                                   var lastcolor = makeColor(last, color);
+                                   var firstcolor = makeColor(first, color,"min");
+                                   var lastcolor = makeColor(last, color,"max");
 
                                     var gra = svgDoc.getElementById("MyGradient");
                                     var colorstart = svgDoc.getElementById("colorstart");

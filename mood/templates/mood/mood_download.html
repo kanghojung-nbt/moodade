@@ -13,7 +13,7 @@
 
 
 {% endblock %}
-
+{% block myextrastyle %}<script src="{% static "js/makeSVG.js" %}"></script>{% endblock %}
 {% block extrascript %}
 
     $(document).ready(function(){
@@ -22,20 +22,16 @@
 
 
 
-    var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
-    "magenta":330};
+
 
     var category = "{{ category }}";
 
-    firstpercent= parseInt(10 * {{ verbmin }}  );
-    lastpercent= parseInt(10 * {{ verbmax }}  );
+    firstpercent= parseFloat( {{ verbmin }}  );
+    lastpercent= parseFloat({{ verbmax }}  );
 
+    var firstcolor= makeColor(firstpercent,"{{ category }}","min");
 
-    var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt({{ verbmin }}))+",88%, "+firstpercent+"%"+", 0.8)";
-
-
-    var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt({{ verbmax }}))+",98%,    "+lastpercent+"%"+",1)";
-
+    var lastcolor = makeColor(lastpercent,"{{ category }}","max");
 
 
     var textline = 18; //18  글자가 넘어가면 다음 문구로 가라.
@@ -254,59 +250,52 @@
     <center>
         <div class="sub-title">내 기분을 담은 배경화면을 만들어 보세요</div>
     </center>
-
-    <div class="container" style="margin-top: 32px; margin-bottom: 10%">
-        <div class="row">
-            <center><div class="col-sm-6">
-                <canvas id="drawCanvas" width="280" height="360">Canvas not supported
+</a>
+    <table>
+        <tr>
+            <td class="canvastd" >
+              <canvas id="drawCanvas" width="280" height="360">Canvas not supported
                 </canvas>
                 <div>
-                  <button id="btnSave">저장하기</button>
+                 <a id="btnSave" style="margin-left: 4%" class="buttongroup mood_calendar_button">저장하기</a>
                 </div>
-            </div></center>
-            <div class="col-sm-6">
-                <div class ="selected_text">
-                    <center><img class="" src="{% static 'img/menu/background_make.png' %}" ></center>
-                    <center><div class="sub-title">원하는 문구를 선택하거나 입력해 주세요.</div></center>
-
-                    <div class ="select-menu" >
-                              <div style="position: absolute ; left :20px ;top :40%">
-                                  <img class="" id="btnPrev" src="{% static 'img/menu/left.png' %}" style="float: left">
-                              </div>
-                              <center>
-                                  <div class ="nowtext" id="displayText" name="nowtext" style="line-height:200% ; position: absolute ; left :40px ;top :25% ; right: 40px";  >
-                                  </div>
-                              </center>
-                              <div width="5%" style="position: absolute ; right :20px ;top :40%">
-                                  <img class="" id="btnNext"src="{% static 'img/menu/right.png' %}">
-                              </div>
-                                <div   style="position: absolute ;float:  left;  left: 20% ;bottom :20%">
-                                <textarea cols="40" lows="40" id="CustomText" style="float:left"> </textarea>
-                                <input type="submit" id="btnCustom" value="확인"style="position: relative ; left: 15px ;bottom: 10%">
-                            </div>
+            </td>
+             <td class="righttd">
+                 <div class ="selected">
+                <center>
+                    <img class="seleted-img" src="{% static 'img/menu/background_make.png' %}" >
+                </center>
+                <center>
+                    <div class="sub-title">
+                       원하는 문구를 선택하거나 입력해 주세요.
                     </div>
-                </div>
-                <div style="margin-top: 20px">
+                </center>
 
-                    <center>
-                         <div>회원가입하고 더 많은 서비스 이용해보기</div>
-                         <div style="margin-bottom: 5px">
-                            <button id="btnMain">메인화면으로</button>
-                            <button id="btnRegister">회원가입</button>
-                         </div>
-                    </center>
-                </div>
-            </div>
-        </div>
-        <div>
+                <div class ="select_text" >
+                    <div class="">
+                          <div>
+                              <img class="left" id="btnPrev"  src="{% static 'img/menu/left.png' %}" >
+                          </div>
+                          <div class ="nowtext"  id="displayText" name="nowtext"   >
+                          </div>
+                          <div >
+                              <img class="right" id="btnNext"  src="{% static 'img/menu/right.png' %}">
+                          </div>
+                    </div>
+                          <div class="bottomclass">
+                            <textarea rows="4" class="inputarea"  placeholder="원하시는 문구를 입력해주세요" id="comment_text"  autocomplete="off" role="textbox"  aria-haspopup="true"></textarea>
+                            <a class="mood_small_button" id="btnCustom" >확인</a>
+                          </div>
+                    </div>
+                 </div>
+                 <div class="buttongroup">
+                     <a href="/" class="mood_main_button" >메인화면으로</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/moodcalendar" class="mood_calendar_button">무드 캘린더 보기</a>
+                 </div>
+              </div>
+            </td>
+        </tr>
+    </table>
 
-        </div>
-    </div>
     <img id="saveImg" src="" style="display:none;"/>
-
-
 {% endblock %}
-
-
-
-

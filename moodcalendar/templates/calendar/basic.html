@@ -58,7 +58,8 @@
 
 {% endblock %}
 {% block extrascript %}
-   function csrfSafeMethod(method) {
+
+        function csrfSafeMethod(method) {
             // these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
@@ -78,7 +79,35 @@
             }
             return cookieValue;
         }
+        function ajax_Memo() {
+             var csrftoken = getCookie('csrftoken');
+             var data = $("#currentDate").text().split(" ");
+            var year = data[0].split("년")[0];
+            var month = data[1].split("월")[0];
+              //  내가 텍스트area 에 입력한 값들을 읽어 들인다.
+            var day = $("#todate").text().split("일")[0];
 
+            var memo=  $("#mymemo").val() ;
+                    console.log(year + month + day + memo);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/moodcalendar/write/',
+                        data: {'year': year, 'month': month, 'day': day , 'memo':memo},
+                        datatype: 'json',
+                        beforeSend: function (xhr, settings) {  //data가 다 오지 않았을때의 처리
+                            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        },
+
+                        success: function (result) {  //data가 다 도착 하였을때.
+                            console.log(result);
+                            var test = result;
+                            var str = new String();
+
+                        }
+                    });
+                }
 
         $(function () {
             var csrftoken = getCookie('csrftoken');
@@ -254,8 +283,8 @@
                     var last = parseFloat( calendarmap[thisday].maxNum);
                     var svg = document.getElementById("circle-svg");
 
-                    var firstcolor = makeColor(first, color);
-                    var lastcolor = makeColor(last, color);
+                    var firstcolor = makeColor(first, color,"min");
+                    var lastcolor = makeColor(last, color,"max");
 
                     var svgDoc = svg.contentDocument;
                     var colorstart = svgDoc.getElementById("colorstart");
@@ -342,8 +371,8 @@
                                 var gradienttext=' '
 
 
-                                var firstcolor= makeColor(first,color);
-                                var lastcolor = makeColor(last,color);
+                                var firstcolor= makeColor(first,color,"min");
+                                var lastcolor = makeColor(last,color,"max");
 
 
 
@@ -368,8 +397,8 @@
                                     var svg = document.getElementById("circle-svg");
                                    var svgDoc = svg.contentDocument;
 
-                                   var firstcolor = makeColor(first, color);
-                                   var lastcolor = makeColor(last, color);
+                                   var firstcolor = makeColor(first, color,"min");
+                                   var lastcolor = makeColor(last, color,"max");
 
                                     var gra = svgDoc.getElementById("MyGradient");
                                     var colorstart = svgDoc.getElementById("colorstart");

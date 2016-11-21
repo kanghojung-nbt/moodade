@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% block extrastyle %}{% static 'css/heartshape.css' %}{% endblock %}
+{% block myextrastyle %}<script src="{% static "js/makeSVG.js" %}"></script>{% endblock %}
 {% block extra_head %}
     <style type="text/css">
         .st0 {
@@ -39,9 +40,6 @@
 
     var category ="{{ category }}";
     var colordata=[];
-    var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
-    "magenta":330};
-
 
 
     var firstpercent ,lastpercent;
@@ -51,19 +49,14 @@
     var first,last;
     first= colordata[0];
     last = colordata[colordata.length-1];
-    firstpercent= parseInt(10 * first);
-    lastpercent = parseInt(10* last);
+    firstpercent= parseFloat( first);
+    lastpercent = parseFloat(last);
 
 
-    {#stop-color="white"#}
-    //hsla(120, 100%, 50%, 0.3);
+    var firstcolor= makeColor(firstpercent,"{{ category }}","max");
+    var lastcolor = makeColor(lastpercent,"{{ category }}","min");
 
-    console.log(last);
 
-    var firstcolor= "hsla("+(colorMap["{{ category }}"]-parseInt(first))+",88%, "+firstpercent+"%"+", 0.9)";
-    console.log(firstcolor);
-    var lastcolor = "hsla("+( parseInt(colorMap["{{ category }}"])+parseInt(last))+",98%, "+lastpercent+"%"+", 1)";
-    console.log(lastcolor);
     $("#colorstart").attr("stop-color",firstcolor);
     $("#colorlast").attr("stop-color",lastcolor);
     $("#idlist").val(IDlist);
@@ -171,7 +164,7 @@
                         <input type="number" name="verbmax" id="verbmax2" hidden>
                         <input type="number" name="verbmin" id="verbmin2" hidden>
                         <input type="text" name="category" id="category2" hidden>
-                        <a onclick="calendarSubmit()" class="mood_button">캘린더에 결과 저장하기</a>
+                        <a onclick="calendarSubmit()" class="mood_pink_button">캘린더에 결과 저장하기</a>
                     </form>
                 </div>
             </div>

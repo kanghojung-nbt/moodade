@@ -39,6 +39,21 @@ footer {
     margin-bottom:20px;
 }
 
+
+.mood_pink_button {
+    background-color: #ffd1d6;
+    width:300px;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    display: inline-block;
+    cursor: pointer;
+    color: #3f3951;
+    font-size: 24px;
+    padding: 13px 37px;
+    text-decoration: none;
+}
+
 .mood_button {
     background-color: #3f3951;
     width:300px;
