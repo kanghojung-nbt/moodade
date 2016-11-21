@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extrastyle %}{% static 'css/about/about.css' %}{% endblock %}
+
+{% block  style %}
+ <style>
+        #topMenu{
+            height:60px;
+            width:100%;
+            background-color: white;
+            border-bottom: #c6c6c6 solid 0.01rem;
+            display:block;
+            position:fixed;
+            top:0;
+            left:0;
+        }
+
+        #topMenu ul{
+            position:absolute;
+            right:0;
+            padding-right:5%;
+        }
+        #topMenu ul li{
+            list-style:none;
+            color:white;
+            background-color:white;
+            float:left;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        #topMenu .menulink{
+            text-decoration:none;
+            color:#353535;
+            display:block;
+            width:120px;
+            font-size: 16px;
+        }
+
+        #topMenu .menulink:hover{
+            color:#fcc3d7;
+        }
+
+        #myButton {
+            background-color:#3f3951;
+            -moz-border-radius:42px;
+            -webkit-border-radius:42px;
+            border-radius:42px;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-weight: 700;
+            font-size:16px;
+            padding:6px 30px;
+            text-decoration:none;
+            position:relative;
+            bottom:5px;
+        }
+
+        body{
+            padding-top:60px;
+            margin:0;
+        }
+
+        #toplogo{
+            position:absolute;
+            left:3.5%;
+            height:27.5px;
+        }
+
+        footer{
+            background-color: #f6f6f6;
+            width: 100%;
+            font-size:11px;
+            text-align: center;
+            padding-bottom: 5px;
+        }
+
+        main{
+            margin-bottom: 4%;
+            background-color: white;
+            text-align: center;
+        }
+
+        .icon{
+            height: 12px;
+        }
+
+        #about1{
+            width:100%;
+            height:180px;
+            background-color: #3f3951;
+            padding-top:50px;
+            margin-bottom: 45px;
+        }
+
+        #about2, #about3, #about4, #about5{
+            margin-bottom: 150px;
+        }
+
+        .h1{
+            font-family:'Oduda-SemiBold';
+            color:#ffd1d6;
+            font-size:48px;
+        }
+
+        .h2{
+            font-family:'Oduda-SemiBold';
+            font-size:32px;
+        }
+
+        .h3{
+            font-family:'Oduda-SemiBold';
+            color:#3f3951;
+            font-size: 24px;
+            margin-bottom: 45px;
+            text-decoration: underline;
+        }
+
+        .h4{
+            font-size:20px;
+            color:#3f3951;
+            margin-bottom: -5px;
+            margin-top: 1px;
+        }
+
+        .h5{
+            font-size:18px;
+            color:#353535;
+            line-height: 1.8rem;
+        }
+
+        .h6{
+            font-size:14px;
+            color:#ffffff;
+        }
+
+
+        .circle{
+            width:130px;
+            height:130px;
+            display:inline-block;
+            margin-right:30px;
+        }
+
+        .explain{
+            text-align: left;
+            display:inline-block;
+            width:600px;
+            display:inline-block;
+        }
+
+        .box{
+            vertical-align: middle;
+            margin-bottom: 20px;
+        }
+
+
+ </style>
+
+
+{% endblock %}
+
+{% block mainhome %}
+  <div class="big-container">
+    <main>
+        <div id="about1">
+            <div class="h1">About MoodAde</div>
+            <div class="h6">무드에이드에 대한 이야기를 들어보세요</div></div>
+
+        <div id="about2">
+            <p class="h2">Hello there!</p>
+            <p><img src="{% static 'img/about/hello.png'%}"></p>
+            <p class="h5">어서와요.<br>소중히 하지 않으면 금세 잊힐 당신의 감정을<br>무드에이드가 컬러로 물들여 드릴게요.</p>
+        </div>
+
+        <div id="about3">
+            <p class="h3">Feel free to get emotional</p>
+            <div>
+                <img src="{% static 'img/about/tablet.png'%}" style="display:inline-block; margin-right:20px; vertical-align:top;">
+                <div style="text-align:left; display:inline-block;">
+                        <p class="h5">매 순간 나의 감정을 최우선으로 생각할 수는 없어요.<br>
+                        그래서 꾹 참기도, 괜찮다고 스스로를 달래보기도 하죠.<br>
+                        그런데 감정은 애써 모른척 한다고 사라지지 않아요.<br>
+                        오히려 우리를 더 아프게 만들 수도 있어요.</p>
+
+                        <p class="h5">내 기분의 주인은 나예요.<br>
+                        무드에이드에서 만큼은 타인의 시선에서 잠시 벗어나<br>
+                        나의 솔직한 감정을 마주해봐요.</p>
+                </div>
+                </div>
+            </div>
+
+        <div id="about4">
+            <p class="h3">MoodAde Background</p>
+            <p class="h5">
+                주변에서 종종 이런 얘기를 듣곤 해요. 인생이 회색 빛이라고.<br>
+                우린 모두 다른 사람이고, 느끼고 생각하는 것도 다 다른데<br>
+                왜 비슷한 이야기들을 하는 걸까요? 인생은 짧고 단 한 번 뿐인데<br>
+                지금 이 순간을 회색으로만 떠올리는 건 너무 슬픈 것 같아요.<br>
+            </p>
+            <p class="h5">
+                사람이 늘 행복할 수만은 없기에 때로는 가면을 써야만 해요.<br>
+                그런데 이 가면이 우리가 생각하는 것보다 훨씬 더 위험한 존재라고 해요.<br>
+                그렇다면 하루 한 번 만이라도 타인과의 관계 이전에 나의 감정 상태에<br>
+                집중하고, 내 스스로에게 솔직해져보면 어떨까요?
+            </p>
+            <p class="h5">
+                돌아보면 별 것 아니었던 일, 픽 웃음이 나는 것처럼<br>
+                내 하루하루가 생각보다 알록달록하다는 걸 깨달을 수 있을 거에요
+            </p>
+            <p class="h5">내 마음의 색, 들여다보고 싶지 않으세요?</p>
+        </div>
+
+        <div id="about5">
+            <p class="h3">Color, Share and Enjoy the Mood!</p>
+
+            <div class="box">
+                <div class="circle"><img src="{% static 'img/about/color.png'%}"></div>
+                <div class="explain" style="margin-bottom:-100px;">
+                    <p class="h4">Color your mood</p>
+                    <p class="h5">
+                       즐거울 땐 더욱 즐겁게, 슬플 땐 충분히 슬프게. 매일 변하는<br>
+                       당신의 감정을 컬러로 물들여 하루하루를 되돌아보세요.<br><br>
+                     </p></div>
+            </div>
+
+            <div class="box">
+                <div class="circle"><img src="{% static 'img/about/share.png'%}"></div>
+                <div class="explain">
+                    <p class="h4">Share your mood</p>
+                    <p class="h5">
+                       가족, 친구 심지어 애인도 이해못하는 나의 기분.<br>
+                       이런 나를 헤아려주고 공감해줄 수 있는 누군가를 만날 수 있다면?<br>
+                       오늘 나와 비슷한 감정의 컬러를 선택한 사람들의 이야기를 듣고,<br>
+                       또 당신의 이야기를 공유할 수 있도록 준비하고 있어요.</p></div>
+            </div>
+
+            <div class="box">
+                <div class="circle"><img src="{% static 'img/about/enjoy.png'%}"></div>
+                <div class="explain">
+                    <p class="h4">Enjoy your mood</p>
+                    <p class="h5">
+                       늘 행복하고 기분 좋을 수 있나요? 좀 슬프고 우울해도 괜찮아요.<br>
+                       나만의 감정 그라데이션이 담긴 굿즈. 오프라인 이벤트
+                       등을 통해 당신의<br>
+                       기분을 조금 더 예쁘게, 또 충분히 느낄 수 있도록 하는 것.<br>
+                       그것이 무드에이드의 바람이자 꿈이에요.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+  </div>
+{% endblock %}

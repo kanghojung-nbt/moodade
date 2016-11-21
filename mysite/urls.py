@@ -37,5 +37,6 @@ urlpatterns = [
                   url(r'^moodcalendar/', include('moodcalendar.urls', namespace='moodcalendar')),
 
 
+                   url(r'^about/',aboutView) ,
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

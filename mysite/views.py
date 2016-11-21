@@ -38,7 +38,8 @@ def my_view(request):
     if user is not None:
         login(request,user)
 
-
+def aboutView(request):
+    return  render(request, "About.html")
 
 # --- TemplateView
 class HomeView(TemplateView):

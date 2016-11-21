@@ -3,6 +3,11 @@
 
 }
 
+nav.navbar.navbar-default.navbar-fixed-top{
+    background-color:white;
+    border-bottom:1px solid #c6c6c6;
+}
+
 @font-face {
     font-family: 'NanumGothic';
     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.ttf) format('truetype');
@@ -13,64 +18,70 @@
 
 body {
     font-family: NanumGothic;
-    height: 800px;
 }
 
 footer {
-    margin-top: 3%;
+
+    padding-top:5%;
+    padding-bottom: 15%;
+    background-color:#f6f6f6;
     font-family: 'NanumGothic';
+    padding-bottom:1.5%;
     font-size: 11px;
     text-align: center;
 }
 
+.step1{
+    margin-bottom:20px;
+}
+
+.step2{
+    margin-bottom:20px;
+}
 
 .mood_button {
-    margin-top: 60px;
-    background-color: #f4abc7;
+    background-color: #3f3951;
+    width:300px;
     -moz-border-radius: 42px;
     -webkit-border-radius: 42px;
     border-radius: 42px;
     display: inline-block;
     cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 18px;
-    font-weight: bold;
+    color: #ffd1d6;
+    font-size: 24px;
     padding: 13px 37px;
     text-decoration: none;
 }
 
 .mood_button:hover {
-    background-color: #7a7a7a;
+    background-color: #ffd1d6;
     text-decoration: none;
-    color: #ffffff;
-}
-
-.mood_button:active {
-    color: #ffffff;
-    text-decoration: none;
-    position: relative;
-    top: 1px;
+    color: #3f3951;
 }
 
 .moodade-title {
-    padding-top: 20px;
-    margin-bottom: 30px;
-    color: black;
+    line-height:normal;
+    color: #353535;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
 }
 
 .sub-title {
-    padding-top: 10px;
+    padding-top: 5px;
     color: #7a7a7a;
     font-size: 14px;
+    padding-bottom:20px;
 
 }
 
 table.change-list, table.change-list th, table.change-list td {
     border: 1px solid #ccc;
+}
+
+a{
+    color:#7a7a7a;
+    text-decoration:none;
 }
 
 a:active {

@@ -17,11 +17,11 @@
 {% block extrascript %}
 
     $(document).ready(function(){
-    var agent = navigator.userAgent.toLowerCase();
 
-    if (agent.indexOf("msie") == -1) {
-        $("#CustomText").attr("cols" ,25);
-    }
+
+
+
+
     var colorMap={"red":360, "orange":30, "yellow":60 , "green":180, "skyblue":210, "blue":240 ,"purple":300,
     "magenta":330};
 
@@ -40,7 +40,7 @@
 
     var textline = 18; //18  글자가 넘어가면 다음 문구로 가라.
 
-    var mood_text=[];
+    var mood_text=["무드에이드를 이용해주셔서 감사합니다."];
 
 
     var textidx=0;
@@ -255,7 +255,7 @@
         <div class="sub-title">내 기분을 담은 배경화면을 만들어 보세요</div>
     </center>
 
-    <div class="container" style="margin-top: 32px">
+    <div class="container" style="margin-top: 32px; margin-bottom: 10%">
         <div class="row">
             <center><div class="col-sm-6">
                 <canvas id="drawCanvas" width="280" height="360">Canvas not supported

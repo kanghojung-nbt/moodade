@@ -24,7 +24,7 @@
     }
     function calendarSubmit() {
 
-     document.CalendarSaveForm.submit();
+    document.CalendarSaveForm.submit();
     }
 {% endblock %}
 {% block extrascript %}
@@ -81,21 +81,29 @@
 
     <div class="moodade-title" style="text-align: center"> 당신의 무드에이드는?</div>
     <div class="moodade-subtitle" style="text-align: center"> 오늘 당신의 기분은 어떤 색인가요?</div>
-    <div class="conainter-fluid" style="margin-top: 5%">
-    <div class="row">
-    <div class="col-xs-6" style="text-align: center">
-        <div class=today-mood" style="align-content:center"><img class=""
-                                                                 src="{% static 'img/menu/today_moodade.png' %}">
-        </div>
-        <div class='block center-block' style="margin-top: 40px">
-            <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg  version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+    <div class="conainter-fluid" style="margin-top: 5% ;">
+        <div class="row">
+            <div class="col-xs-6" style="text-align: center">
+                <div class=today-mood" style="align-content:center"><img class=""
+                                                                         src="{% static 'img/menu/today_moodade.png' %}">
+                </div>
+                <div class='block center-block' style="margin-top: 40px">
+                    <?xml version="1.0" encoding="utf-8"?>
+                    <!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                    <svg  version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
 	 y="0px" viewBox="0 0 224 222" style="enable-background:new 0 0 224 222;" width="250px" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:url(#MyGradient);}
-	.st2{fill:#353535;}
+	.st0 {
+        fill: none;
+    }
+
+    .st1 {
+        fill: url(#MyGradient);
+    }
+
+    .st2 {
+        fill: #353535;
+    }
 </style>
 <g>
 	<path class="st0" d="M167.8,87.3c5.8,0,10.5-4.7,10.5-10.5c0-5.8-4.7-10.5-10.5-10.5s-10.5,4.7-10.5,10.5
@@ -126,49 +134,47 @@
 </g>
 </svg>
 
-            <div id="category" value="{{ myverb }}" style="margin-top: 40px"></div>
-            <div class="moodade-verb-list mood-text">
-                <div class="mood-recipe">무드에이드 레시피</div>
-                <hr class="large" color="red">
-                {% for verb in myverb %}
-                    {{ verb.mood_Verb }}  &nbsp;&nbsp;
-                {% endfor %}
+                    <div id="category" value="{{ myverb }}" style="margin-top: 40px"></div>
+                    <div class="moodade-verb-list mood-text">
+                        <div class="mood-recipe">무드에이드 레시피</div>
+                        <hr class="large" color="red">
+                        {% for verb in myverb %}
+                            {{ verb.mood_Verb }}  &nbsp;&nbsp;
+                        {% endfor %}
+                    </div>
+
+                </div>
+
             </div>
+            <div class="col-xs-6" title="오른쪽">
+                <div class="your-mood">{{ emoticon }}한 당신</div>
+                <div class="anothers-mood">현재 OO 명의 사람들이 당신과<Br>
+                    같은 기분을 느끼고 있어요.<br><br>
+                    감정을 어루만져 줄 문구와 함께<br>
+                    나만의 색이 담긴 배경화면을 만들어 보세요!
+                </div>
 
-        </div>
-
-    </div>
-    <div class="col-xs-6" title="오른쪽">
-        <div class="your-mood">{{ emoticon }}한 당신</div>
-        <div class="anothers-mood">현재 OO 명의 사람들이 당신과<Br>
-            같은 기분을 느끼고 있어요.<br><br>
-            감정을 어루만져 줄 문구와 함께<br>
-            나만의 색이 담긴 배경화면을 만들어 보세요!
-        </div>
-
-        <div style="padding-left: 60px; padding-top:20px;">
-            <form name="idCheckForm"  method="post" action="/mood/mood_down/">
-                {% csrf_token %}
-                <input type="text" name="idlist" id="idlist" hidden/>
-                <input type="number" name="verbmax" id="verbmax" hidden>
-                <input type="number" name="verbmin" id="verbmin" hidden>
-                <input type="text" name="category" id="category1" hidden>
-                <input type="submit" onclick="idCheckSubmit()"value="배경화면 만들러 가기" class="ct-btn">
-            </form>
-        </div>
-        <div style="padding-left: 60px; padding-top:10px; margin-bottom:20px">
-            <form name="CalendarSaveForm" method="post" action="/moodcalendar/">
-                {% csrf_token %}
-                <input type="text" name="idlist" id="idlist2" hidden/>
-                <input type="number" name="verbmax" id="verbmax2" hidden>
-                <input type="number" name="verbmin" id="verbmin2" hidden>
-                <input type="text" name="category" id="category2" hidden>
-                <input type="submit" onclick="calendarSubmit()"value="캘린더에 결과 저장하기" class="clandr-btn">
-            </form>
+                <div style="padding-left: 60px; padding-top:20px;">
+                    <form name="idCheckForm" method="post" action="/mood/mood_down/">
+                        {% csrf_token %}
+                        <input type="text" name="idlist" id="idlist" hidden/>
+                        <input type="number" name="verbmax" id="verbmax" hidden>
+                        <input type="number" name="verbmin" id="verbmin" hidden>
+                        <input type="text" name="category" id="category1" hidden>
+                        <a onclick="idCheckSubmit()" class="mood_button">배경화면 만들러 가기</a>
+                    </form>
+                </div>
+                <div style="padding-left: 60px; padding-top:10px; margin-bottom:20px">
+                    <form name="CalendarSaveForm" method="post" action="/moodcalendar/">
+                        {% csrf_token %}
+                        <input type="text" name="idlist" id="idlist2" hidden/>
+                        <input type="number" name="verbmax" id="verbmax2" hidden>
+                        <input type="number" name="verbmin" id="verbmin2" hidden>
+                        <input type="text" name="category" id="category2" hidden>
+                        <a onclick="calendarSubmit()" class="mood_button">캘린더에 결과 저장하기</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
-
-
-
-

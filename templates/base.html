@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}Django Web Programming{% endblock %}</title>
+    <title>{% block title %}무드에이드{% endblock %}</title>
     {% block extra_head %}{% endblock %}
-
+    <link rel ="shortcut icon" href="{% static 'img/favicon/moodade_favicon.png' %}"/>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <!-- Latest compiled and minified CSS -->
@@ -41,6 +41,7 @@
             {% endblock %}
         });
     </script>
+    {% block style %}{% endblock %}
     <style>
         body {
             padding-top: 90px;
@@ -69,7 +70,7 @@
                 <img src="{% static 'img/menu/logo_top.png' %}" style="float: left; padding-top: 10px"/>
             </a>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/mood/mood_select">무드 에이드란?</a></li>
+                <li><a href="/about">무드 에이드란?</a></li>
                 <li><a href="/mood/mood_select">오늘의기분</a></li>
                 <li><a href="{% url 'moodcalendar:mycalendar' %}">컬러다이어리</a></li>
                 <li class="dropdown">
@@ -110,6 +111,7 @@
 </div> <!-- /container -->
 
 {% block footer %}
+
     <footer>
         <div class="container">
             <div class="row">
