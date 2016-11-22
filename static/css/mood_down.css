@@ -10,29 +10,30 @@
 }
 .selected{
     background-color: #f6f6f6;
-    width: 480px;
+    width: 550px;
     height: 360px;
 }
 .bottomclass{
     position: absolute;
-    top: 40%;
+    top: 450px;
     right:24%;
 }
 .nowtext{
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-top: 3%;
-    width: 420px;
+    padding-left: 140px;
+    padding-right: 50px;
+    margin-top: 30px;
+    width: 440px;
     float: left;
 }
 img.left{
     position: absolute;
-    top:33%
+    right:49%;
+    top:300px;
 }
 img.right{
    position: absolute;
-    top:33%;
-    right:23%;
+    top:300px;
+    right:24%;
 }
     /** 왼쪽 화살표 오른쪽 화살표 그리고 그 사이에 커스텀 문구 절대좌표  **/
 .innerText{
@@ -40,15 +41,14 @@ img.right{
 }
 .inputarea{
     position: absolute;
-    top:30%;
-     right:110%;
+     right:100px;
     resize: none;
-    width:280px;
+    width:260px;
 
 }
 .buttongroup{
     position: absolute;
-    top:65%;
+    top:640px;
 }
 
 span{
@@ -66,7 +66,7 @@ td.canvastd{
 }
 td.righttd{
 
-    padding-left: 15%;
+    padding-left: 120px;
 }
 
 .seleted-img{
@@ -77,7 +77,7 @@ td.righttd{
     background-color: #3f3951;
     border-radius: 10px;
     display: inline-block;
-    margin-top: 41%;
+
     cursor: pointer;
     color: #ffd1d6;
     font-size: 24px;
@@ -101,7 +101,6 @@ td.righttd{
 
 .mood_main_button {
     background-color: #ffd1d6;
-
     -moz-border-radius: 42px;
     -webkit-border-radius: 42px;
     border-radius: 42px;
