@@ -10,9 +10,12 @@ nav.navbar.navbar-default.navbar-fixed-top{
 
 @font-face {
     font-family: 'NanumGothic';
-    src: url(/static/font/KoPubDotumBold/KoPubDotumBold.ttf) format('truetype');
-     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.eot) format('truetype');
-     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.woff) format('truetype');
+    font-style: normal;
+    src:url(/static/font/KoPubDotumMedium/KoPubDotumMedium.eot#iefix) format('embedded-opentype');
+    src: url(/static/font/KoPubDotumBold/KoPubDotumBold.eot#iefix) format('embedded-opentype');
+    src: url(/static/font/KoPubDotumBold/KoPubDotumBold.ttf#iefix) format('truetype');
+
+     src: url(/static/font/KoPubDotumBold/KoPubDotumBold.woff#iefix) format('truetype');
 
 }
 
@@ -21,9 +24,7 @@ body {
 }
 
 footer {
-
-    padding-top:5%;
-    padding-bottom: 15%;
+    padding-top:1.5%;
     background-color:#f6f6f6;
     font-family: 'NanumGothic';
     padding-bottom:1.5%;
@@ -37,21 +38,6 @@ footer {
 
 .step2{
     margin-bottom:20px;
-}
-
-
-.mood_pink_button {
-    background-color: #ffd1d6;
-    width:300px;
-    -moz-border-radius: 42px;
-    -webkit-border-radius: 42px;
-    border-radius: 42px;
-    display: inline-block;
-    cursor: pointer;
-    color: #3f3951;
-    font-size: 24px;
-    padding: 13px 37px;
-    text-decoration: none;
 }
 
 .mood_button {
@@ -72,6 +58,44 @@ footer {
     background-color: #ffd1d6;
     text-decoration: none;
     color: #3f3951;
+}
+
+.mood_button1 {
+    background-color: #3f3951;
+    width:240px;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffd1d6;
+    font-size: 18px;
+    padding: 10px 20px;
+    text-align:center;
+    text-decoration: none;
+}
+
+.mood_button1:hover{
+    color:#ffd1d6;
+}
+
+.mood_button2 {
+    background-color: #ffd1d6;
+    width:240px;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    display: inline-block;
+    cursor: pointer;
+    color: #3f3951;
+    font-size: 18px;
+    padding: 10px 20px;
+    text-align:center;
+    text-decoration: none;
+}
+
+.mood_button2:hover {
+    color:#3f3951;
 }
 
 .moodade-title {

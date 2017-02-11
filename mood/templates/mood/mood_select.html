@@ -29,13 +29,21 @@
             var idx = ourverb.indexOf(verbid);
             if(idx ==-1) { // 값이 없다면
                 ourverb.push(verbid);
-                $(this).css("border-color", "pink");
-                console.log(verbid);
+                $(this).css("border-color", "#3f3951");
+                $(this).css("background-color", "#3f3951");
+                $(this).css("color", "#ffd1d6");
+{#               border-color : #3f3951;#}
+{#background-color : #3f3951;#}
+{#color : #ffd1d6;#}
+
+
             }
             else {
                 console.log("제거");
                 ourverb.splice(idx, 1);
                 $(this).css("border-color", "black");
+                $(this).css("background-color", "white");
+                $(this).css("color", "black");
             }
         console.log(ourverb);
         })

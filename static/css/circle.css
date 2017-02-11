@@ -2,17 +2,18 @@
     width: 135px;
     height: 70px;
     border-radius: 6px;
-    border: 2.5px solid #353535;
+    border: 2px solid #353535;
     text-align: center;
     margin: 1%;
     margin-right: 4%;
     margin-left: 4%;
     padding-top:22px;
+    font-size:16px;
 }
 #mood_button{
     background-color: #3f3951;
     width:240px;
-    color: white;
+    color: #ffd1d6;
     font-size: 20px;
     margin-bottom: 50px;
     margin-top:20px;

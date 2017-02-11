@@ -2,32 +2,36 @@
 	width: 60%;
 	/*margin: 0 auto;*/
 }
+
+
 .diary{
 
 }
 
 #btnPrev{
-    margin-right: 4%;
+    margin-right: 2%;
 }
 #btnNext{
-    margin-left: 4%;
+    margin-left: 2%;
 }
 #currentDate{
-    font-size: 30px;
+    font-size: 24px;
+    color: #353535;
 }
 #selectMonth{
     font-size: 18px;
 }
 .thisMonth{
     color:white;
-     border-radius:30px;
-    background-color: #2C2C2C;
+    text-align:center;
+    padding: 4px 4px;
+     border-radius:20px;
+    background-color: #3f3951;
 
 }
 .rightTable{
-    padding-left: 5%;
-    border-left:  dashed 1px #d5d5d5 ;
-
+    padding-left: 50px;
+    border-left:  dashed 1px #d5d5d5;
     color: #666666;
 }
 
@@ -36,7 +40,8 @@
 
 /*/////////////////////*/
 #selectMonth{
-	margin-left: 10%;
+	margin-left: 21%;
+	margin-right: -20px;
 }
 #month1{
 	margin-right: 2%;
@@ -74,7 +79,7 @@
 textarea {
   margin-top: 10px;
     resize : none;
-  width: 400px;
+  width: 300px;
   height: 150px;
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
@@ -84,21 +89,23 @@ textarea {
   border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
   border-image: none;
   border-radius: 6px 6px 6px 6px;
-  border-style: none solid solid none;
+  border-style: none;
   border-width: medium 1px 1px medium;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-  color: #555555;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 1em;
   line-height: 1.4em;
-  padding: 5px 8px;
+  padding: 20px;
   transition: background-color 0.2s ease 0s;
 }
+
+
+
 #daymood{
-    margin-top:5%;
-    margin-bottom: 5%;
-    font-size: 180%;
-    padding-right: 53%;
+	height:31px;
+    margin-top:2px;
+    color:#353535;
+    text-align:left;
+    margin-bottom: 0px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -108,33 +115,33 @@ textarea:focus {
 }
 
 #todate{
-    margin-top: 20%;
-    padding-right:30%;
-    font-size: 160%;
+    margin-topleft: 20%;
+    padding-right:240px;
+    font-size: 24px;
 }
 .topline{
 
 
 }
+
 .ttt{
-    width: 90%;
+	margin-top:5px;
+	margin-bottom:5px;
+    width: 95%;
     border-width: 1px;
     border-color: rgba(198, 198, 198, 0.2);
-
-
 }
 
 .mood_button {
     float:right;
     margin-top: 10px;
-    background-color: #f4abc7;
+    background-color: #3f3951;
     -moz-border-radius: 42px;
     -webkit-border-radius: 42px;
     border-radius: 42px;
     display: inline-block;
     cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
+    color: #ffd1d6;
     font-size: 18px;
     font-weight: bold;
     padding: 10px  30px 10px 30px;
@@ -142,16 +149,13 @@ textarea:focus {
 }
 
 .mood_button:hover {
-    background-color: #7a7a7a;
-    text-decoration: none;
-    color: #ffffff;
+	background-color:#3f3951;
+    color: #ffd1d6;
 }
 
 .mood_button:active {
-    color: #ffffff;
-    text-decoration: none;
-    position: relative;
-    top: 1px;
+	background-color:#3f3951;
+    color: #ffd1d6;
 }
 
 
@@ -176,16 +180,20 @@ textarea:focus {
 	color:#c6c6c6;
 
 }
+
+
 #calendar table {
 	border-collapse: collapse;
 	text-align: center;
+	margin-left: 30px;
 }
 #calendar table thead td {
 	height: 40px;
 	font-weight: bold;
 }
 #calendar table td {
-}
+	height:20px;}
+	
 #calendar table td.sun {
 	color: #dddddd;
 }
@@ -198,14 +206,25 @@ textarea:focus {
     color: #004E87;
 }
 
+.Prev{
+	cursor:pointer;
+	margin-bottom:10px;
+}
+
+.Next{
+	margin-bottom:10px;
+	cursor:pointer;
+}
+
 #calendar table td.date-cell  {
-    width: 80px;
-    height: 80px;
-    /*border-radius: 100%;*/
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
     border-color: pink;
-	padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     color: pink;
-    /*margin: 5%;*/
+    /* margin: 5%; */
 }
 
 

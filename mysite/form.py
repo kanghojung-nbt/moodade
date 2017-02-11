@@ -21,7 +21,8 @@ class SignupForm(UserCreationForm):
                                     'invalid': "This value may contain only letters,  numbers and "  "@/./+/-/_ characters."},
                                 widget=forms.TextInput(attrs={
                                     'class': 'form-control',
-                                    'placeholder': '아이디'
+                                    'height': 3,
+                                    'placeholder': '아이디',
                                 }))
 
     password1 = forms.CharField(label="Password",

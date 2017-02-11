@@ -18,8 +18,6 @@ def mood_form(request):
     if request.method == 'POST':  # 만약 폼 의해 제출
         k=(request.POST.get('verblist', False))
         verblist ='%s' %request.POST.get('verblist',False)
-        print(k);
-        print(verblist)
         splitedverb=verblist.split(",")
         returndata=[]
         for idx, val in enumerate(splitedverb):
