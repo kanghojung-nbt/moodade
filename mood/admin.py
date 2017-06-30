@@ -2,6 +2,7 @@ from django.contrib import admin
 from mood.models import Mood,Emoticon,Emotion,EmotionText,DownText
 
 # Register your models here.
+# test
 
 class MoodAdmin(admin.ModelAdmin):
     list_display = ('color', 'emotion', 'mood_Verb','mood_Amount')
